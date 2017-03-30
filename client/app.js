@@ -48,6 +48,8 @@ app.factory('User', function($http, $window, $location, $rootScope) {
       method: 'POST',
       url: '/api/signup',
       data: {
+        //"firstname" : firstname
+        //"lastname" : lastname
         "email": email,
         "password": password
         "firstName" : firstName,
@@ -74,6 +76,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
     var req = {
       method: 'POST',
       url: '/api/signin',
+      //will add to data object: firstname, lastname
       data: {email, password}
     };
     console.log('Client sending signin request: ', req);
