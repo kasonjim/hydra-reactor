@@ -51,7 +51,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         //"firstname" : firstname
         //"lastname" : lastname
         "email": email,
-        "password": password
+        "password": password,
         "firstName" : firstName,
         "lastName" : lastName,
 
