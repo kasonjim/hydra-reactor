@@ -43,7 +43,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
   var userData = $rootScope.userData;
 
   // POST request to create a new user
-  var newSignUp = function(email, password) {
+  var newSignUp = function(email, password, firstName, lastName) {
     var req = {
       method: 'POST',
       url: '/api/signup',
@@ -52,6 +52,9 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         //"lastname" : lastname
         "email": email,
         "password": password
+        "firstName" : firstName,
+        "lastName" : lastName,
+
       }
     };
     console.log('Client sending newSignuUp request: ', req);
