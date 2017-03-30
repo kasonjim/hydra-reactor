@@ -1,8 +1,8 @@
-<div ng-controller="tripCreatorController">
+<div>
   <form>
     <div class="form-group">
       <input type="text" class="form-control" id="exampleTripName" placeholder="Trip Name" ng-model="tripName">
     </div>
-    <button type="submit" class="btn trip-creator-btn" ng-click="newTrip(userData.value['_id'], tripName); go('/tripview')">Submit</button>
+    <button type="submit" class="btn trip-creator-btn" ng-click="newTrip(userData.value['_id'], tripName); go('/dashboard')">Submit</button>
   </form>
 </div>
