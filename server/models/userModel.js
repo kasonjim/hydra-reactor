@@ -8,16 +8,31 @@ mongoose.Promise = global.Promise;
 var Schema = mongoose.Schema;
 
 var ActivitySchema = new Schema({
+  yelpBusinessName: String,
+  yelpUrl: String,
+  yelpRating: Integer,
+  yelpPriceRange: String,
+  yelpID: String,
+  yelpReviewCount: Integer,
+  yelpImage: String,
+  totalLikes: Integer,
+  likedBy: [UserSchema],
   description: String,
   category: String
 });
 
 var TripSchema = new Schema({
   tripName: String,
+  shortDescription: String,
+  location: String,
+  imageUrl: String,
+  users: [UserSchema],
   activities: [ActivitySchema]
 });
 
 var UserSchema = new Schema({
+  firstName: String,
+  lastName: String,
   email: {
     type: String,
     required: true,
@@ -44,6 +59,12 @@ var UserSchema = new Schema({
     }
   }],
   trips: [TripSchema]
+});
+
+var ItinerarySchema = new Schema({
+  startDate: DateTime,
+  title: String,
+  activities: [ActivitySchema]
 });
 
 // 'UserSchema.methods' is a collection of methods on the instance of the UserSchema
