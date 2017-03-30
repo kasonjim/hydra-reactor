@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Comment out one of the two following lines, depending on which database you are using
-// mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
-mongoose.connect('mongodb://localhost/hydra');
+if (process.env.DATABASE_URL) {
+  mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
+} else {  
+  mongoose.connect('mongodb://localhost/hydra');
+}
 var db = mongoose.connection;
 
 app.use(express.static(path.join(__dirname, '../client/')));

@@ -6,21 +6,8 @@ const bcrypt = require('bcryptjs');
 mongoose.Promise = global.Promise;
 
 var Schema = mongoose.Schema;
-
-var ActivitySchema = new Schema({
-  yelpBusinessName: String,
-  yelpUrl: String,
-  yelpRating: Integer,
-  yelpPriceRange: String,
-  yelpID: String,
-  yelpReviewCount: Integer,
-  yelpImage: String,
-  totalLikes: Integer,
-  likedBy: [UserSchema],
-  description: String,
-  category: String
-});
-
+var UserSchema = new Schema();
+var ActivitySchema = new Schema();
 var TripSchema = new Schema({
   tripName: String,
   shortDescription: String,
@@ -61,8 +48,26 @@ var UserSchema = new Schema({
   trips: [TripSchema]
 });
 
+var ActivitySchema = new Schema({
+  yelpBusinessName: String,
+  yelpUrl: String,
+  yelpRating: Number,
+  yelpPriceRange: String,
+  yelpID: String,
+  yelpReviewCount: Number,
+  yelpImage: String,
+  totalLikes: Number,
+  likedBy: [UserSchema],
+  description: String,
+  category: String
+});
+
+
+
+
+
 var ItinerarySchema = new Schema({
-  startDate: DateTime,
+  startDate: Date,
   title: String,
   activities: [ActivitySchema]
 });
