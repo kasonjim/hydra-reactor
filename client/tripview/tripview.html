@@ -1,49 +1,33 @@
-<div class="cards">
-  <div class="card" ng-repeat="trip in userData.value.trips track by $index">
-      <div class="cardContainer">
-        <div class="newCard" ng-click="setTripIndex(trip); go('/listview')">
-          <div class="cardHeader">
-            <div class="cardLogo left"> </div>
-            <div>
-              <div class="tripCardTitle">
-                <p>{{ trip.tripName }}</p>
-              </div>
-              <div class="tripCardDescription">
-                <p>So relaxing</p>
-              </div>
-            </div>
-          </div>
-          <div class="cardBodyImg"></div>
-          <div class="bottomContainer">
-            <div class="cardStack">
-              <p class="left">Have a great trip!</p>
-            </div>
-            <div class="cardNav">
-            </div>
-          </div>
-        </div>
+<div class="container">
+  <div class="trip-name">{{ userData.value.trips[currentTripIndex.value].tripName }}</div>
+  <div class="list-view-form">
+    <form class="form-inline">
+      <div class="form-group activity-input">
+        <label for="exampleInputName2"></label>
+        <input type="text" ng-model='description' class="form-control" id="exampleInputName2" placeholder="Add new activity">
       </div>
-    </div>
-</div>
-
-<div class="cardContainer">
-  <div class="newCard">
-    <div class="cardHeader">
-      <div class="cardLogo left"> </div>
-      <div>
-        <div class="tripCardTitle">
-          <p>Your Trip Name</p>
-        </div>
-        <div class="tripCardDescription">
-          <p>Trip Description.</p>
-        </div>
-      </div>
-    </div>
-    <div class="userButton" ng-click="go('/tripcreator')"></div>
-    <div class="clickContainer">
-      <div class="userClick">
-        <p>Click to add a new trip.</p>
-      </div>
-    </div>
+      <select class="form-control category-selector" ng-model='category'>
+        <option value="Food">Food</option>
+        <option value="Excursion">Excursion</option>
+        <option value="Nightlife">Nightlife</option>
+        <option value="Exercise">Exercise</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Relaxation">Relaxation</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Other">Other</option>
+      </select>
+      <button ng-click="newActivity(userData.value['_id'], userData.value.trips[currentTripIndex.value]['_id'], description, category);
+                description='';
+                category=''"
+              type="submit" class="btn btn-primary">Add Activity</button>
+    </form>
+  </div>
+  <div class='list-view-activities'>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="item in userData.value.trips[currentTripIndex.value].activities track by $index"
+          ng-click="deleteActivity(userData.value['_id'], userData.value.trips[currentTripIndex.value]['_id'], item['_id'])">
+          {{item.description}} ~ {{item.category}}
+      </li>
+    </ul>
   </div>
 </div>

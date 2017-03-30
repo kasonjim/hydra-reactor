@@ -1,0 +1,49 @@
+<div class="cards">
+  <div class="card" ng-repeat="trip in userData.value.trips track by $index">
+      <div class="cardContainer">
+        <div class="newCard" ng-click="setTripIndex(trip); go('/tripview')">
+          <div class="cardHeader">
+            <div class="cardLogo left"> </div>
+            <div>
+              <div class="tripCardTitle">
+                <p>{{ trip.tripName }}</p>
+              </div>
+              <div class="tripCardDescription">
+                <p>So relaxing</p>
+              </div>
+            </div>
+          </div>
+          <div class="cardBodyImg"></div>
+          <div class="bottomContainer">
+            <div class="cardStack">
+              <p class="left">Have a great trip!</p>
+            </div>
+            <div class="cardNav">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="cardContainer">
+  <div class="newCard">
+    <div class="cardHeader">
+      <div class="cardLogo left"> </div>
+      <div>
+        <div class="tripCardTitle">
+          <p>Your Trip Name</p>
+        </div>
+        <div class="tripCardDescription">
+          <p>Trip Description.</p>
+        </div>
+      </div>
+    </div>
+    <div class="userButton" ng-click="go('/tripcreator')"></div>
+    <div class="clickContainer">
+      <div class="userClick">
+        <p>Click to add a new trip.</p>
+      </div>
+    </div>
+  </div>
+</div>
