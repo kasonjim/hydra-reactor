@@ -28,7 +28,7 @@ app.run(function ($http, $rootScope, $location) {
     $http(req)
       .then(function successCallback(response) {
         userData.value = response.data;
-        $location.path('/tripview');
+        $location.path('/dashboard');
       }, function errorCallback(error) {
         console.log('error!', error);
       });
@@ -39,6 +39,7 @@ app.run(function ($http, $rootScope, $location) {
 
 app.factory('User', function($http, $window, $location, $rootScope) {
 
+
   var userData = $rootScope.userData;
 
   // POST request to create a new user
@@ -47,6 +48,8 @@ app.factory('User', function($http, $window, $location, $rootScope) {
       method: 'POST',
       url: '/api/signup',
       data: {
+        //"firstname" : firstname
+        //"lastname" : lastname
         "email": email,
         "password": password
       }
@@ -58,7 +61,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         userData.value = response.data;
         // save JWT token in local sessionStorage
         sessionStorage.setItem('auth', response.data.tokens[0].token);
-        window.location.href = '#/tripview';
+        window.location.href = '#/dashboard';
       }, function errorCallback(error) {
         console.log('error!', error);
       });
@@ -70,6 +73,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
     var req = {
       method: 'POST',
       url: '/api/signin',
+      //will add to data object: firstname, lastname
       data: {email, password}
     };
     console.log('Client sending signin request: ', req);
@@ -80,7 +84,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         // save JWT token in local sessionStorage
         // setItem and getItem are methods on the sessionStorage object
         sessionStorage.setItem('auth', response.data.tokens[0].token);
-        window.location.href = '#/tripview';
+        window.location.href = '#/dashboard';
       }, function errorCallback(error) {
         console.log('error!', error);
       });
