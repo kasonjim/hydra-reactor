@@ -17,16 +17,12 @@ node_modules/
 
 ### Bower ###
 **/bower_components/
-### PhPStorm ###
-.idea/
 
 # Server
 node_modules/
 npm-debug.log
-<<<<<<< HEAD
 
 db/
-client/lib
 compiled/
 bak/
 
@@ -35,5 +31,3 @@ bak/
 .floobit
 .floo
 .flooignore
-=======
->>>>>>> resolving rebase conflicts.

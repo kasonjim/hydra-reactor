@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/darinallen/hydra-reactor#readme",
   "dependencies": {
+    "yelp-fusion": "^1.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
