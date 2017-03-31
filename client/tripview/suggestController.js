@@ -1,4 +1,6 @@
-angular.module('suggestModule', [])
+angular.module('suggestModule', [
+  'ui.bootstrap'
+])
 
 .controller('suggestController', ['$scope', '$http', function($scope, $http) {
   $scope.results = [];
@@ -7,16 +9,6 @@ angular.module('suggestModule', [])
   $scope.term = 'Four Barrel Coffee';
   $scope.location = 'san francisco, ca';
   $scope.categories = 'coffee';
-
-  // Populate categories array with array of { "alias": ..., "title": ... } (1457 of them)
-  return $http({
-    method: 'GET',
-    url: '../lib/categories.json'
-  }).then( (res) => {
-    $scope.allCategories = res.data.map( category => {
-      return { alias: category.alias, title: category.title };
-    });
-  });
 
   // Search yelp based on the three fields above (location will be automatic in our site later)
   $scope.search = function() {
@@ -53,6 +45,23 @@ angular.module('suggestModule', [])
       // res.data.reviews
     });
   };
+
+  // Populate categories array with array of { "alias": ..., "title": ... } (1457 of them)
+  $scope.seed = function() {
+    return $http({
+      method: 'GET',
+      url: '../lib/categories.json'
+    }).then( (res) => {
+      $scope.allCategories = res.data.map( category => {
+        return { alias: category.alias, title: category.title };
+      });
+      console.log($scope.allCategories);
+    }).catch( (err) => {
+      console.error('error: ', err);
+    });
+  };
+
+  $scope.seed();
 }]);
 
 
