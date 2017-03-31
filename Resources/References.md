@@ -11,8 +11,9 @@
 
 ## Research
 
-* [Ace Editor](https://ace.c9.io/#nav=embedding)
-* [Angular-UI-Ace](https://www.npmjs.com/package/angular-ui-ace)
+* [MongoDB Embed vs. Reference](https://docs.google.com/presentation/d/1hAJnl3J0KG01q5FUi8wPeTF7Y-bINZlaKylPbThaw7M/edit#slide=id.p)
+* [Invalid Value for Schema Array Path](http://stackoverflow.com/questions/30856208/invalid-value-for-schema-array-path)
+
 
 ## CDN Links
 
@@ -23,7 +24,14 @@
 
 ## Cheatsheets/Quick References
 
+* [MongoDB 2.4 Shell Cheatsheet](https://dhodgin.files.wordpress.com/2013/10/mongo-shell-cheat-sheet-v2-4.pdf)
 
-## Tools
+## Troubleshooting
 
-* [Emmet.io](https://emmet.io/)
+* **Cannot connect to MongoDB/Connection Refused**: 
+    * Navigate to `/data/db` in the Terminal
+    * If there is a `mongod.lock` file, delete it 
+    * Try to restart the `mongod` service using `brew services start mongodb`
+    * Try to enter the shell using the command `mongo`
+
+[Emmet.io](https://emmet.io/)

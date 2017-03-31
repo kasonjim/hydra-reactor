@@ -1,0 +1,42 @@
+{
+  "POST /api/signup": {
+    "desc": "Creates a new user",
+    "response": "400",
+    "data":
+  },
+  "POST /api/signin": {
+    "desc": "Creates a user session",
+    "response": "400",
+    "data":
+  },
+  "GET /api/users": {
+    "desc": "Gets user data. Includes a record of all trips.",
+    "response": "200",
+    "data":
+  },
+  "DELETE /api/token": {
+    "desc": "Deletes a user session.",
+    "response": "200, 400",
+    "data":
+  },
+  "POST /api/trips": {
+    "desc": "Creates a new trip.",
+    "response": "",
+    "data":
+  },
+  "POST /api/activities": {
+    "desc": "Creates a new activity.",
+    "response": "",
+    "data":
+  },
+  "DELETE /api/activities": {
+    "desc": "Deletes an activity.",
+    "response": "",
+    "data":
+  },
+  "VERB /api/route": {
+    "desc": "",
+    "response": "",
+    "data":
+  },
+}
