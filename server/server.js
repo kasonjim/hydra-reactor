@@ -13,6 +13,13 @@ app.use(bodyParser.json());
 var User = mongoose.model('User');
 // Comment out one of the two following lines, depending on which database you are using
 
+if (process.env.DATABASE_URL) {
+  mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
+} else {
+  mongoose.connect('mongodb://localhost/hydra');
+}
+var db = mongoose.connection;
+
 
 app.use(express.static(path.join(__dirname, '../client/')));
 
@@ -122,6 +129,7 @@ const yelp = require('yelp-fusion');
 const access_token = 'fGoGg9R3LTeL_o3xFdss8s14Ue258y-6NRnQaLnBY8JKfe_tKZIkmhY3pGwyCIHFPB9UZRQTC_YUoWBknukDeGxD1UlkQ088bxrb53GCuZ7KqDZFySlFWpqAfn7cWHYx';
 const client = yelp.client(access_token);
 
+
 app.post('/api/yelpSearch', function(req, res) {
   var searchQuery = req.body;
 
@@ -143,6 +151,7 @@ app.post('/api/yelpBusiness', function(req, res) {
         });
     });
 });
+
 
 var port = process.env.PORT || 3000;
 // var ip = process.env.IP || 'localhost';
