@@ -33,24 +33,24 @@ h1 {
 .list-group-item {
   cursor: pointer;
 }
-.cardLogo {
+/*.cardLogo {
   background: url(images/hydra-travel.png) no-repeat top center;
   margin: 5px;
   width: 50px;
   height: 50px;
   background-size: cover;
-}
+}*/
 .cards {
   text-align: center;
-  magin: 0 auto;
+  margin: 0 auto;
 }
-.cardContainer {
+/*.cardContainer {
   position: relative;
   text-align: center;
   margin: 0 auto;
   padding: 15px;
-}
-.newCard {
+}*/
+/*.newCard {
   width: 350px;
   margin: 0 auto;
   height: 350px;
@@ -62,11 +62,11 @@ h1 {
 }
 .newCard:hover {
   border: 2px solid blue;
-}
-.cardHeader {
+}*/
+/*.cardHeader {
   width:100%;
   height: 60px;
-}
+}*/
 .left {
   float: left;
 }
@@ -79,22 +79,22 @@ h1 {
   float: left;
   clear: left;
 }
-.cardBodyImg {
-  float: left;
+/*.card-img {*/
+/*  float: left;
   background: url(images/sunnybeach.jpg) no-repeat top center;
   width: 100%;
-  height: 100px;
-  background-size: cover;
-}
+  height: 100%;
+  background-size: cover;*/
+/*}*/
 .tripCardHeadContainer {
   float: left;
 }
-.tripCardTitle {
-  height: 30px;
+/*.card-title {*/
+/*  height: 30px;
   margin-top: 5px;
   font-size: 20px;
-  float: left;
-}
+  float: left;*/
+/*}*/
 .tripCardDescription {
   margin-top: 0px;
   font-size: 12px;
