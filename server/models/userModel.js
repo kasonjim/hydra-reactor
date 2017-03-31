@@ -6,18 +6,22 @@ const bcrypt = require('bcryptjs');
 mongoose.Promise = global.Promise;
 
 var Schema = mongoose.Schema;
+
 var UserSchema = new Schema();
+var ItinerarySchema = new Schema();
+var TripSchema = new Schema();
 var ActivitySchema = new Schema();
-var TripSchema = new Schema({
+
+TripSchema.add({
   tripName: String,
   shortDescription: String,
   location: String,
   imageUrl: String,
   users: [UserSchema],
-  activities: [ActivitySchema]
+  itineraries: [ItinerarySchema]
 });
 
-var UserSchema = new Schema({
+UserSchema.add({
   firstName: String,
   lastName: String,
   email: {
@@ -48,7 +52,7 @@ var UserSchema = new Schema({
   trips: [TripSchema]
 });
 
-var ActivitySchema = new Schema({
+ActivitySchema.add({
   yelpBusinessName: String,
   yelpUrl: String,
   yelpRating: Number,
@@ -62,11 +66,7 @@ var ActivitySchema = new Schema({
   category: String
 });
 
-
-
-
-
-var ItinerarySchema = new Schema({
+ItinerarySchema.add({
   startDate: Date,
   title: String,
   activities: [ActivitySchema]
@@ -99,7 +99,7 @@ UserSchema.methods.removeToken = function (token) {
 
 // 'UserSchema.statics' is a collection of methods on the UserSchema model
 UserSchema.statics.findByToken = function (token) {
-  var User = this;
+  //var User = this;
   var decoded;
 
   try {
@@ -117,7 +117,7 @@ UserSchema.statics.findByToken = function (token) {
 
 // find user by email and password
 UserSchema.statics.findByCredentials = function (email, password) {
-  var User = this;
+  //var User = this;
 
   return User.findOne({email}).then((user) => {
     if (!user) {

@@ -3,19 +3,25 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 var User = require('./models/userModel.js');
+
 // We used ES6 syntax with the Authenticate middleware because it was easier to build with and understand
 var {authenticate} = require('./middleware/authenticate');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 // Comment out one of the two following lines, depending on which database you are using
+
 if (process.env.DATABASE_URL) {
   mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
-} else {  
-  mongoose.connect('mongodb://localhost/hydra');
+} else {
+  try {
+    mongoose.connect('mongodb://localhost/hydra');
+  } catch (err) {
+    mongoose.createConnection('mongodb://localhost/hydra');
+  }
 }
 var db = mongoose.connection;
+
 
 app.use(express.static(path.join(__dirname, '../client/')));
 
@@ -24,6 +30,7 @@ app.use(express.static(path.join(__dirname, '../client/')));
 app.post('/api/signup', function(req, res) {
   console.log('Received the following POST request to create a user: ', req.body);
   // Mongoose method to create a user
+
   var user = new User(req.body);
   user.save().then(() => {
     return user.generateToken();
@@ -74,6 +81,22 @@ app.post('/api/trips', authenticate, function(req, res) {
   });
 });
 
+app.post('/api/itineraries', authenticate, function(req, res) {
+  // Pass in request object that includes user id, trip object id, activity object
+  console.log('Received the following POST request to create an itinerary item: ', req.body);
+  User.findById(req.body.user_id, function(err, user) {
+    if (err) {
+      console.log('Error: ', error);
+    } else {
+      // Commented out version with day schema
+      // user.trips.id(req.body.trip_id).days.id(req.body.day_id).activities.push(req.body.activity);
+      user.trips.id(req.body.trip_id).itineraries.push(req.body.itinerary);
+      user.save();
+      res.json(user);
+    }
+  });
+});
+
 // Set up POST request listener for creating a new activity
 // Expects to receive user_id, trip_id, and activity in req.body,
 // where activity is an object with description and category properties
@@ -110,6 +133,34 @@ app.delete('/api/activities', authenticate, function(req, res) {
     }
   });
 });
+
+const yelp = require('yelp-fusion');
+const access_token = process.env.YELP_TOKEN;
+const client = yelp.client(access_token);
+
+
+app.post('/api/yelpSearch', function(req, res) {
+  var searchQuery = req.body;
+
+  client.search(searchQuery).then(response => {
+    res.status(200).send(response.jsonBody.businesses);
+  }).catch(e => { console.log(e); });
+});
+
+app.post('/api/yelpBusiness', function(req, res) {
+  var id = req.body.id;
+  var moreInfo = {};
+  client.business(id)
+    .then(response => {
+      moreInfo['details'] = response.jsonBody;
+      client.reviews(req.body.id)
+        .then(response => {
+          moreInfo['reviews'] = response.jsonBody.reviews;
+          res.status(200).send(moreInfo);
+        });
+    });
+});
+
 
 var port = process.env.PORT || 3000;
 // var ip = process.env.IP || 'localhost';
