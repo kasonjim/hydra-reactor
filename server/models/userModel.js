@@ -6,11 +6,18 @@ const bcrypt = require('bcryptjs');
 mongoose.Promise = global.Promise;
 
 var Schema = mongoose.Schema;
-
-const TripSchema = new Schema();
 var UserSchema = new Schema();
+var ItinerarySchema = new Schema();
+var TripSchema = new Schema({
+  tripName: String,
+  shortDescription: String,
+  location: String,
+  imageUrl: String,
+  users: [UserSchema],
+  itineraries: [ItinerarySchema]
+});
 
-UserSchema.add({
+var UserSchema = new Schema({
   firstName: String,
   lastName: String,
   email: {
@@ -41,6 +48,26 @@ UserSchema.add({
   trips: [TripSchema]
 });
 
+var ActivitySchema = new Schema({
+  yelpBusinessName: String,
+  yelpUrl: String,
+  yelpRating: Number,
+  yelpPriceRange: String,
+  yelpID: String,
+  yelpReviewCount: Number,
+  yelpImage: String,
+  totalLikes: Number,
+  likedBy: [UserSchema],
+  description: String,
+  category: String
+});
+
+var ItinerarySchema = new Schema({
+  startDate: Date,
+  title: String,
+  activities: [ActivitySchema]
+});
+
 // 'UserSchema.methods' is a collection of methods on the instance of the UserSchema
 
 // Generate JWT tokens
@@ -67,8 +94,8 @@ UserSchema.methods.removeToken = function (token) {
 };
 
 // 'UserSchema.statics' is a collection of methods on the UserSchema model
-UserSchema.methods.findByToken = function (token) {
-  //var User = this;
+UserSchema.statics.findByToken = function (token) {
+  var User = this;
   var decoded;
 
   try {
@@ -85,8 +112,8 @@ UserSchema.methods.findByToken = function (token) {
 };
 
 // find user by email and password
-UserSchema.methods.findByCredentials = function (email, password) {
-  //var User = this;
+UserSchema.statics.findByCredentials = function (email, password) {
+  var User = this;
 
   return User.findOne({email}).then((user) => {
     if (!user) {
@@ -125,6 +152,4 @@ UserSchema.pre('save', function (next) {
 
 var User = mongoose.model('User', UserSchema);
 
-module.exports = {
-  User: User
-};
+module.exports = User;

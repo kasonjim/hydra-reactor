@@ -2,17 +2,20 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
-var db = require('./models/db.js');
-//var User = require('./models/userModel.js').User;
-
+var User = require('./models/userModel.js');
 // We used ES6 syntax with the Authenticate middleware because it was easier to build with and understand
 var {authenticate} = require('./middleware/authenticate');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-var User = mongoose.model('User');
-// Comment out one of the two following lines, depending on which database you are using
 
+// Comment out one of the two following lines, depending on which database you are using
+if (process.env.DATABASE_URL) {
+  mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
+} else {
+  mongoose.connect('mongodb://localhost/hydra');
+}
+var db = mongoose.connection;
 
 app.use(express.static(path.join(__dirname, '../client/')));
 
@@ -21,9 +24,8 @@ app.use(express.static(path.join(__dirname, '../client/')));
 app.post('/api/signup', function(req, res) {
   console.log('Received the following POST request to create a user: ', req.body);
   // Mongoose method to create a user
-
-  User = new User(req.body);
-  User.save().then(() => {
+  var user = new User(req.body);
+  user.save().then(() => {
     return user.generateToken();
   }).then(token => {
     res.header('x-auth', token).send(user);
@@ -37,10 +39,6 @@ app.post('/api/signup', function(req, res) {
 app.post('/api/signin', function(req, res) {
   var {email, password} = req.body;
   console.log('Received the following GET request for a user: ', req.body);
-  User = new User();
-  // console.log('/api/signin ROUTE...');
-  // console.log('E-mail: ', email);
-  // console.log('Password: ', password);
   User.findByCredentials(email, password).then(user => {
     return user.generateToken().then(token => {
       res.header('x-auth', token).send(user);
@@ -88,11 +86,6 @@ app.post('/api/activities', authenticate, function(req, res) {
     } else {
       // Commented out version with day schema
       // user.trips.id(req.body.trip_id).days.id(req.body.day_id).activities.push(req.body.activity);
-      console.log('Trip ID: ', user.trips.id(req.body.trip_id));
-      console.log('Activities: ', user.trips.id(req.body.trip_id).activities);
-      if (!user.trips.id(req.body.trip_id).activities) {
-        user.trips.id(req.body.trip_id).activities = [];
-      }
       user.trips.id(req.body.trip_id).activities.push(req.body.activity);
       user.save();
       res.json(user);
@@ -121,15 +114,12 @@ app.delete('/api/activities', authenticate, function(req, res) {
 const yelp = require('yelp-fusion');
 const access_token = 'fGoGg9R3LTeL_o3xFdss8s14Ue258y-6NRnQaLnBY8JKfe_tKZIkmhY3pGwyCIHFPB9UZRQTC_YUoWBknukDeGxD1UlkQ088bxrb53GCuZ7KqDZFySlFWpqAfn7cWHYx';
 const client = yelp.client(access_token);
-
 app.post('/api/yelpSearch', function(req, res) {
   var searchQuery = req.body;
-
   client.search(searchQuery).then(response => {
     res.status(200).send(response.jsonBody.businesses);
   }).catch(e => { console.log(e); });
 });
-
 app.post('/api/yelpBusiness', function(req, res) {
   var id = req.body.id;
   var moreInfo = {};
@@ -143,6 +133,7 @@ app.post('/api/yelpBusiness', function(req, res) {
         });
     });
 });
+
 
 var port = process.env.PORT || 3000;
 // var ip = process.env.IP || 'localhost';
