@@ -5,7 +5,8 @@ angular.module('signinSplash', [
   'signupModule',
   'dashboardModule',
   'tripCreatorModule',
-  'tripViewModule'
+  'tripViewModule',
+  'suggestModule'
 ])
 
 .config(function($routeProvider, $locationProvider) {
@@ -50,6 +51,17 @@ angular.module('signinSplash', [
     },
     templateUrl: 'tripview/tripView.html',
     controller: 'tripViewController'
+  })
+  .when('/suggest', {
+    resolve: {
+      check: function ($location) {
+        if (!sessionStorage.getItem('auth')) {
+          $location.path('/signin');
+        }
+      }
+    },
+    templateUrl: 'tripview/suggest.html',
+    controller: 'suggestController'
   })
   .otherwise({
     redirectTo: '/signin'
