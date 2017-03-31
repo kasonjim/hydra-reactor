@@ -48,13 +48,10 @@ app.factory('User', function($http, $window, $location, $rootScope) {
       method: 'POST',
       url: '/api/signup',
       data: {
-        //"firstname" : firstname
-        //"lastname" : lastname
-        "email": email,
-        "password": password,
         "firstName" : firstName,
         "lastName" : lastName,
-
+        "email": email,
+        "password": password
       }
     };
     console.log('Client sending newSignuUp request: ', req);
