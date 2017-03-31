@@ -2,15 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
-var db = require('./models/db.js');
-//var User = require('./models/userModel.js').User;
+var User = require('./models/userModel.js');
 
 // We used ES6 syntax with the Authenticate middleware because it was easier to build with and understand
 var {authenticate} = require('./middleware/authenticate');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-var User = mongoose.model('User');
 // Comment out one of the two following lines, depending on which database you are using
 
 if (process.env.DATABASE_URL) {
@@ -48,10 +46,6 @@ app.post('/api/signup', function(req, res) {
 app.post('/api/signin', function(req, res) {
   var {email, password} = req.body;
   console.log('Received the following GET request for a user: ', req.body);
-  User = new User();
-  // console.log('/api/signin ROUTE...');
-  // console.log('E-mail: ', email);
-  // console.log('Password: ', password);
   User.findByCredentials(email, password).then(user => {
     return user.generateToken().then(token => {
       res.header('x-auth', token).send(user);

@@ -98,7 +98,7 @@ UserSchema.methods.removeToken = function (token) {
 };
 
 // 'UserSchema.statics' is a collection of methods on the UserSchema model
-UserSchema.methods.findByToken = function (token) {
+UserSchema.statics.findByToken = function (token) {
   //var User = this;
   var decoded;
 
@@ -116,7 +116,7 @@ UserSchema.methods.findByToken = function (token) {
 };
 
 // find user by email and password
-UserSchema.methods.findByCredentials = function (email, password) {
+UserSchema.statics.findByCredentials = function (email, password) {
   //var User = this;
 
   return User.findOne({email}).then((user) => {
@@ -156,6 +156,4 @@ UserSchema.pre('save', function (next) {
 
 var User = mongoose.model('User', UserSchema);
 
-module.exports = {
-  User: User
-};
+module.exports = User;
