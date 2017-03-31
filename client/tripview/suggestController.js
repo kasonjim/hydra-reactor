@@ -1,12 +1,24 @@
 angular.module('suggestModule', [])
 
 .controller('suggestController', ['$scope', '$http', function($scope, $http) {
+  $scope.results = [];
+  $scope.allCategories = [];  // "title" is shown on page, "alias" is the category value
+
   $scope.term = 'Four Barrel Coffee';
   $scope.location = 'san francisco, ca';
   $scope.categories = 'coffee';
 
-  $scope.results = [];
+  // Populate categories array with array of { "alias": ..., "title": ... } (1457 of them)
+  return $http({
+    method: 'GET',
+    url: '../lib/categories.json'
+  }).then( (res) => {
+    $scope.allCategories = res.data.map( category => {
+      return { alias: category.alias, title: category.title };
+    });
+  });
 
+  // Search yelp based on the three fields above (location will be automatic in our site later)
   $scope.search = function() {
     return $http({
       method: 'POST',
@@ -16,26 +28,27 @@ angular.module('suggestModule', [])
         location: $scope.location,
         radius: 16000,
         categories: $scope.categories,
-        limit: 10,
+        limit: 5,
         offset: 0,
         sort_by: 'best_match',
         price: '1,2,3,4'
       }
-    }).then(function(res) {
-      console.log('response', res.data);
+    }).then( (res) => {
+      console.log('search results', res.data);
       $scope.results = res.data;
     });
   };
 
-  $scope.business = function() {
+  // Get more details on the specific business (for now, you click on the image)
+  $scope.businessDetails = function(index) {
     return $http({
       method: 'POST',
       url: '/api/yelpBusiness',
       data: {
-        id: $scope.results[0].id
+        id: $scope.results[index].id
       }
-    }).then(function(res) {
-      console.log('response', res.data);
+    }).then( (res) => {
+      console.log('more details', res.data);
       // res.data.details
       // res.data.reviews
     });

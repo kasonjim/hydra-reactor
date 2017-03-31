@@ -7,10 +7,20 @@
         <!-- For now, have a button that will do "business" and "reviews" methods manually
            Eventually just changing the carousel will automatically do this for the current business viewed-->
     <!-- Cancel Suggestion button | Add Suggestion button -->
-    <input ng-model="term" /><br />
-    <input ng-model="location" /><br />
+    <label>Category</label>
     <input ng-model="categories" /><br />
-    <h1 ng-click="search()">SEARCH!</h1><br />
-    <h1 ng-click="business()">MORE INFO!</h1>
+
+    <label>Search</label>
+    <input ng-model="term" /><br />
+
+    <label>Location</label>
+    <input ng-model="location" /><br />
+    <button ng-click="search()">SEARCH!</button><br /><br />
+
+    <div ng-repeat="result in results">
+      <img ng-click="businessDetails($index)" src="{{result.image_url}}" height="100px"><br />
+      <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
+      {{result.rating}} stars with {{result.review_count}} reviews<br />
+    </div>
   </div>
 <!-- </md-dialog> -->
