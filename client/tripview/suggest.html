@@ -14,16 +14,16 @@
   <!-- Carousel with image, business name, url, rating, cost -->
       <!-- For now, have a button that will do "business" and "reviews" methods manually
          Eventually just changing the carousel will automatically do this for the current business viewed-->
-  <div height="400px">
-    <carousel>
-      <slide ng-repeat="result in results" active="result.active">
+  <div style="height: 300px">
+    <div uib-carousel active="active">
+      <div uib-slide ng-repeat="result in results">
         <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" height="200px"><br />
         <div class="carousel-caption">
           <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
           {{result.rating}} stars with {{result.review_count}} reviews<br />
         </div>
-      </slide>
-    </carousel>
+      </div>
+    </div>
   </div>
 
   <!-- Cancel Suggestion button | Add Suggestion button -->
