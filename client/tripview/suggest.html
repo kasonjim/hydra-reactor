@@ -1,26 +1,30 @@
-<!-- <md-dialog> -->
-  <div class="container" ng-cloak>
-    <!-- Dialogue header: "Add a suggestion" -->
-    <!-- Yelp logo | Yelp category input box | Yelo search keyword input box -->
-    <!-- Carousel with image, business name, url, rating, cost -->
-    <!-- Reviews with image, username, rating, description -->
-        <!-- For now, have a button that will do "business" and "reviews" methods manually
-           Eventually just changing the carousel will automatically do this for the current business viewed-->
-    <!-- Cancel Suggestion button | Add Suggestion button -->
-    <label>Category</label>
-    <input ng-model="categories" /><br />
+<div class="container" ng-cloak>
+  <h2>Add a suggestion!</h2>
+  <img src="../images/yelp.png" height="30px"
+  <label>Category</label>
+  <input ng-model="categories" /><br />
 
-    <label>Search</label>
-    <input ng-model="term" /><br />
+  <label>Search</label>
+  <input ng-model="term" /><br />
 
-    <label>Location</label>
-    <input ng-model="location" /><br />
-    <button ng-click="search()">SEARCH!</button><br /><br />
+  <label>Location</label>
+  <input ng-model="location" /><br />
+  <button ng-click="search()">SEARCH!</button><br /><br />
 
-    <div ng-repeat="result in results">
-      <img ng-click="businessDetails($index)" src="{{result.image_url}}" height="100px"><br />
-      <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
-      {{result.rating}} stars with {{result.review_count}} reviews<br />
-    </div>
+  <!-- Carousel with image, business name, url, rating, cost -->
+      <!-- For now, have a button that will do "business" and "reviews" methods manually
+         Eventually just changing the carousel will automatically do this for the current business viewed-->
+  <div height="400px">
+    <carousel>
+      <slide ng-repeat="result in results" active="result.active">
+        <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" height="200px"><br />
+        <div class="carousel-caption">
+          <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
+          {{result.rating}} stars with {{result.review_count}} reviews<br />
+        </div>
+      </slide>
+    </carousel>
   </div>
-<!-- </md-dialog> -->
+
+  <!-- Cancel Suggestion button | Add Suggestion button -->
+</div>
