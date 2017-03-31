@@ -135,7 +135,7 @@ app.delete('/api/activities', authenticate, function(req, res) {
 });
 
 const yelp = require('yelp-fusion');
-const access_token = 'fGoGg9R3LTeL_o3xFdss8s14Ue258y-6NRnQaLnBY8JKfe_tKZIkmhY3pGwyCIHFPB9UZRQTC_YUoWBknukDeGxD1UlkQ088bxrb53GCuZ7KqDZFySlFWpqAfn7cWHYx';
+const access_token = process.env.YELP_TOKEN;
 const client = yelp.client(access_token);
 
 
