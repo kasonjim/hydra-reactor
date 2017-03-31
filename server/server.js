@@ -81,6 +81,22 @@ app.post('/api/trips', authenticate, function(req, res) {
   });
 });
 
+app.post('/api/itineraries', authenticate, function(req, res) {
+  // Pass in request object that includes user id, trip object id, activity object
+  console.log('Received the following POST request to create an itinerary item: ', req.body);
+  User.findById(req.body.user_id, function(err, user) {
+    if (err) {
+      console.log('Error: ', error);
+    } else {
+      // Commented out version with day schema
+      // user.trips.id(req.body.trip_id).days.id(req.body.day_id).activities.push(req.body.activity);
+      user.trips.id(req.body.trip_id).itineraries.push(req.body.itinerary);
+      user.save();
+      res.json(user);
+    }
+  });
+});
+
 // Set up POST request listener for creating a new activity
 // Expects to receive user_id, trip_id, and activity in req.body,
 // where activity is an object with description and category properties
@@ -93,11 +109,6 @@ app.post('/api/activities', authenticate, function(req, res) {
     } else {
       // Commented out version with day schema
       // user.trips.id(req.body.trip_id).days.id(req.body.day_id).activities.push(req.body.activity);
-      console.log('Trip ID: ', user.trips.id(req.body.trip_id));
-      console.log('Activities: ', user.trips.id(req.body.trip_id).activities);
-      if (!user.trips.id(req.body.trip_id).activities) {
-        user.trips.id(req.body.trip_id).activities = [];
-      }
       user.trips.id(req.body.trip_id).activities.push(req.body.activity);
       user.save();
       res.json(user);
