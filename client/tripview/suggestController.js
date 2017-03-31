@@ -3,15 +3,34 @@ angular.module('suggestModule', [
 ])
 
 .controller('suggestController', ['$scope', '$http', function($scope, $http) {
-  $scope.results = [];
-  $scope.allCategories = [];  // "title" is shown on page, "alias" is the category value
+  $scope.active = 0;
 
-  $scope.term = 'Four Barrel Coffee';
+  $scope.allCategories = [];  // "title" is shown on page, "alias" is the category value
+  $scope.results = [];
+  $scope.reviews = [];
+  $scope.morePhotos = [];
+  $scope.showAdditionalInfo = false;
+
+  $scope.categories = '';
+  $scope.term = '';
   $scope.location = 'san francisco, ca';
-  $scope.categories = 'coffee';
+
+  $scope.$watch('active', function(index) {
+    if ($scope.results.length !== 0) {
+      // Hide header until new review/photo results are in
+      $scope.showAdditionalInfo = false;
+      $scope.businessDetails(index);
+    }
+  });
 
   // Search yelp based on the three fields above (location will be automatic in our site later)
   $scope.search = function() {
+    // Set to -1 to invoke a "change" when watching for active
+    // This will reset to 0 when search returns successful results
+    $scope.active = -1;
+    // Hide header until new review/photo results are in
+    $scope.showAdditionalInfo = false;
+
     return $http({
       method: 'POST',
       url: '/api/yelpSearch',
@@ -19,8 +38,8 @@ angular.module('suggestModule', [
         term: $scope.term,
         location: $scope.location,
         radius: 16000,
-        categories: $scope.categories,
-        limit: 5,
+        categories: $scope.categories.alias,
+        limit: 10,
         offset: 0,
         sort_by: 'best_match',
         price: '1,2,3,4'
@@ -28,6 +47,7 @@ angular.module('suggestModule', [
     }).then( (res) => {
       console.log('search results', res.data);
       $scope.results = res.data;
+      $scope.active = 0;
     });
   };
 
@@ -40,9 +60,10 @@ angular.module('suggestModule', [
         id: $scope.results[index].id
       }
     }).then( (res) => {
-      console.log('more details', res.data);
-      // res.data.details
-      // res.data.reviews
+      // console.log('more details', res.data);
+      $scope.reviews = res.data.reviews;
+      $scope.morePhotos = res.data.details.photos;
+      $scope.showAdditionalInfo = true;
     });
   };
 
@@ -55,7 +76,7 @@ angular.module('suggestModule', [
       $scope.allCategories = res.data.map( category => {
         return { alias: category.alias, title: category.title };
       });
-      console.log($scope.allCategories);
+      // console.log($scope.allCategories);
     }).catch( (err) => {
       console.error('error: ', err);
     });

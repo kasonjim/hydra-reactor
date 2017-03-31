@@ -1,28 +1,44 @@
 <div class="container" ng-cloak>
   <h2>Add a suggestion!</h2>
-  <img src="../images/yelp.png" height="30px"
+  <img src="../images/yelp.png" height="30px"><br />
+
   <label>Category</label>
-  <input ng-model="categories" /><br />
+  <input type="text" ng-model="categories" placeholder="Category" uib-typeahead="category as category.title for category in allCategories | filter:{alias:$viewValue} | limitTo:10" class="form-control">
 
   <label>Search</label>
-  <input ng-model="term" /><br />
+  <input type="text" ng-model="term" placeholder="Search..." class="form-control" />
 
-  <label>Location</label>
-  <input ng-model="location" /><br />
-  <button ng-click="search()">SEARCH!</button><br /><br />
+  <label>Location (This will be the location of the trip in the future)</label>
+  <input ng-model="location" placeholder="Location" class="form-control" /><br />
+  <button class="btn btn-primary" ng-click="search()">SEARCH!</button><br /><br />
 
-  <!-- Carousel with image, business name, url, rating, cost -->
-      <!-- For now, have a button that will do "business" and "reviews" methods manually
-         Eventually just changing the carousel will automatically do this for the current business viewed-->
-  <div style="height: 300px">
+  <div style="height: 300px; width: 700px">
+    <h4>Showing top {{results.length}} results</h4>
     <div uib-carousel active="active">
-      <div uib-slide ng-repeat="result in results">
-        <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" height="200px"><br />
-        <div class="carousel-caption">
+      <div uib-slide ng-repeat="result in results track by $index" index="$index">
+        <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" style="height: 300px"><br />
+        <div class="carousel-caption" style="background-color: rgba(30,30,30,0.8)">
           <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
+          {{result.location.display_address.join(', ')}}<br />
           {{result.rating}} stars with {{result.review_count}} reviews<br />
         </div>
       </div>
+    </div>
+    <div ng-if="showAdditionalInfo">
+      <h4>Reviews and Additional Photos for <strong>{{results[active].name}}</strong></h4>
+      <div ng-repeat="review in reviews track by $index" index="$index">
+        <img ng-src="{{review.user.image_url}}" style="height: 100px"> <br />
+        {{review.user.name}}<br />
+        {{review.text}} (Posted on {{review.time_created}})<br />
+        {{review.rating}} stars (<a href="{{review.url}}" target="_blank">Read full review</a>)<br />
+      </div>
+      <!--
+      <div uib-carousel active="0">
+        <div uib-slide ng-repeat="photosrc in morePhotos track by $index" index="$index">
+          <img ng-src="{{photosrc}}" style="height: 100px">
+        </div>
+      </div>
+       -->
     </div>
   </div>
 
