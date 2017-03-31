@@ -249,3 +249,8 @@ div.footer {
   color: white;
   margin-bottom: 30px;
 }
+
+.form-logout {
+  position: relative;
+  float: right;
+}
