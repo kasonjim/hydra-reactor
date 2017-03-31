@@ -48,7 +48,7 @@ angular.module('signinSplash', [
         }
       }
     },
-    templateUrl: 'tripView/tripView.html',
+    templateUrl: 'tripview/tripView.html',
     controller: 'tripViewController'
   })
   .otherwise({
