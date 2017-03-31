@@ -1,10 +1,12 @@
 var User = require('./../models/userModel');
+var mongoose = require('mongoose');
 
 // This function checks to see if the user has been authenticated to make a given request
 // get JWT token to be sent with every private request to the server
 var authenticate = (req, res, next) => {
   var token = req.header('x-auth');
-
+  var User = mongoose.model('User');
+  User = new User();
   User.findByToken(token).then((user) => {
     console.log('user', user);
     if (!user) {
