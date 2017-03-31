@@ -7,7 +7,46 @@
   "POST /api/signin": {
     "desc": "Creates a user session",
     "response": "400",
-    "data":
+    "data": {
+      "expects": {
+        "email": "danyadsmith@gmail.com",
+        "password": "password"
+      },
+      "returns": {
+        "_id": "58de006314dc44eed2696ab4",
+        "firstName": "Danya",
+        "lastName": "Smith",
+        "email": "danyadsmith@gmail.com",
+        "password": "$2a$10$2/NrEZlqzOnhiW044Bu2QeoOAIANOQlmYnl8UhT1q1LbOMhrBK5jq",
+        "__v": 2,
+        "trips": [
+          {
+            "tripName": "Vegas, Baby!",
+            "_id": "58de006d14dc44eed2696ab6",
+            "itineraries": [],
+            "users": []
+          },
+          {
+            "tripName": "HRR22 World Tour",
+            "_id": "58de007b14dc44eed2696ab7",
+            "itineraries": [],
+            "users": []
+          }
+        ],
+        "tokens": [
+          {
+            "access": "auth",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGRlMDA2MzE0ZGM0NGVlZDI2OTZhYjQiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDkwOTQ0MTAwfQ.h8D4xsgRQwFg9tBMfQw0seM4bSqTzvy_W95mgSHX8Sk",
+            "_id": "58de006414dc44eed2696ab5"
+          },
+          {
+            "access": "auth",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGRlMDA2MzE0ZGM0NGVlZDI2OTZhYjQiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDkwOTc1MDI2fQ.YkTZtiwdFhsWX05E13pYOqxpgLhazuy90GjXu9jGRyA",
+            "_id": "58de793269e55e1a3a1cc3c2"
+          }
+        ]
+      }
+    }
   },
   "GET /api/users": {
     "desc": "Gets user data. Includes a record of all trips.",
@@ -24,6 +63,11 @@
     "response": "",
     "data":
   },
+  "POST /api/itineraries": {
+    "desc": "Adds an event to the itinerary.",
+    "response": "",
+    "data":
+  },
   "POST /api/activities": {
     "desc": "Creates a new activity.",
     "response": "",
@@ -31,6 +75,16 @@
   },
   "DELETE /api/activities": {
     "desc": "Deletes an activity.",
+    "response": "",
+    "data":
+  },
+  "POST /api/yelpSearch": {
+    "desc": "",
+    "response": "",
+    "data":
+  },
+  "POST /api/yelpBusiness": {
+    "desc": "",
     "response": "",
     "data":
   },
