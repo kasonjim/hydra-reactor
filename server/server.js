@@ -16,7 +16,11 @@ var User = mongoose.model('User');
 if (process.env.DATABASE_URL) {
   mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
 } else {
-  mongoose.connect('mongodb://localhost/hydra');
+  try {
+    mongoose.connect('mongodb://localhost/hydra');
+  } catch (err) {
+    mongoose.createConnection('mongodb://localhost/hydra');
+  }
 }
 var db = mongoose.connection;
 
@@ -29,8 +33,8 @@ app.post('/api/signup', function(req, res) {
   console.log('Received the following POST request to create a user: ', req.body);
   // Mongoose method to create a user
 
-  User = new User(req.body);
-  User.save().then(() => {
+  var user = new User(req.body);
+  user.save().then(() => {
     return user.generateToken();
   }).then(token => {
     res.header('x-auth', token).send(user);
