@@ -1,6 +1,96 @@
 <div class="container">
   <div class="trip-name">{{ userData.value.trips[currentTripIndex.value].tripName }}</div>
-  <div class="list-view-form">
+  Location of trip goes here<br />
+  <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Invite a Friend</button>
+  <div uib-collapse="isCollapsed">
+    <input class="form-control" placeholder="Email address" />
+  </div>
+
+  <a href="">Leave/Delete Trip</a>
+
+  <h3>Itinerary</h3>
+  <h4>Add an Itinerary Item</h4>
+  <input class="form-control" placeholder="Event Name" />
+  <p class="input-group">
+    <input ng-model="dt" type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+  </p>
+  <button class="btn btn-primary">Add New Itinerary</button>
+  <h4>Current Itinerary</h4>
+  <div>
+    <div ng-repeat="event in itinerary">
+      Title: {{event.title}}<br />
+      Date: {{event.startDate}}
+    </div>
+  </div>
+
+  <uib-tabset active="activeJustified" justified="true">
+    <uib-tab index="0" heading="Current Suggestions">
+      <div>
+        <div ng-repeat="suggestion in suggestions">
+          {{suggestion.yelpBusinessName}}
+          {{suggestion.yelpUrl}}
+          {{suggestion.yelpRating}}
+          {{suggestion.yelpPriceRange}}
+          {{suggestion.yelpID}}
+          {{suggestion.yelpReviewCount}}
+          {{suggestion.yelpImage}}
+          {{suggestion.totalLikes}}
+          {{suggestion.description}}
+          {{suggestion.category}}
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab index="1" heading="Add a Suggestion">
+        <h2>Add a suggestion!</h2>
+        <img src="../images/yelp.png" height="30px"><br />
+
+        <label>Category</label>
+        <input type="text" ng-model="categories" placeholder="Category" uib-typeahead="category as category.title for category in allCategories | filter:{alias:$viewValue} | limitTo:10" class="form-control">
+
+        <label>Search</label>
+        <input type="text" ng-model="term" placeholder="Search..." class="form-control" />
+
+        <label>Location (This will be the location of the trip in the future)</label>
+        <input ng-model="location" placeholder="Location" class="form-control" /><br />
+        <button class="btn btn-primary" ng-click="search()">SEARCH</button><br /><br />
+        <button class="btn btn-danger" ng-click="add()">ADD</button><br /><br />
+
+        <div style="height: 300px; width: 700px">
+          <h4>Showing top {{results.length}} results</h4>
+          <div uib-carousel active="active">
+            <div uib-slide ng-repeat="result in results track by $index" index="$index">
+              <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" style="height: 300px"><br />
+              <div class="carousel-caption" style="background-color: rgba(30,30,30,0.8)">
+                <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
+                {{result.location.display_address.join(', ')}}<br />
+                Rating: {{result.rating}}/5 with {{result.review_count}} reviews<br />
+              </div>
+            </div>
+          </div>
+          <div ng-if="showAdditionalInfo">
+            <h4>Reviews and Additional Photos for <strong>{{results[active].name}}</strong></h4>
+            <div ng-repeat="review in reviews track by $index" index="$index">
+              <img ng-src="{{review.user.image_url}}" style="height: 100px"> <br />
+              {{review.user.name}}<br />
+              {{review.text}} (Posted on {{review.time_created}})<br />
+              Rating: {{review.rating}}/5 stars (<a href="{{review.url}}" target="_blank">Read full review</a>)<br />
+            </div>
+            <!--
+            <div uib-carousel active="0">
+              <div uib-slide ng-repeat="photosrc in morePhotos track by $index" index="$index">
+                <img ng-src="{{photosrc}}" style="height: 100px">
+              </div>
+            </div>
+             -->
+          </div>
+        </div>
+    </uib-tab>
+  </uib-tabset>
+
+<!--   <div class="list-view-form">
     <form class="form-inline">
       <div class="form-group activity-input">
         <label for="exampleInputName2"></label>
@@ -29,5 +119,5 @@
           {{item.description}} ~ {{item.category}}
       </li>
     </ul>
-  </div>
+  </div> -->
 </div>
