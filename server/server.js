@@ -74,7 +74,7 @@ app.post('/api/signin', function(req, res) {
   });
 });
 
-app.get('/api/users', /* authenticate,*/ (req, res) => {
+app.get('/api/users', authenticate, (req, res) => {
   res.status(200).send(req.user);
 });
 
@@ -88,7 +88,7 @@ app.delete('/api/token', authenticate, (req, res) => {
 
 // Set up POST request listener for creating a new trip
 // Expects to receive user_id and trip in req.body, where trip is an object with a tripName property
-app.post('/api/trips', /*authenticate,*/ function(req, res) {
+app.post('/api/trips', authenticate, function(req, res) {
   console.log('Received the following POST request to create a trip: ', req.body);
   // Mongoose method to retrieve and update a user
   User.findOneAndUpdate({'_id': req.body.user_id}, {$push: { trips: { tripName: req.body.trip.tripName } } }, {new: true}, function(err, user) {
@@ -100,7 +100,7 @@ app.post('/api/trips', /*authenticate,*/ function(req, res) {
   });
 });
 
-app.post('/api/itineraries', /*authenticate,*/ function(req, res) {
+app.post('/api/itineraries', authenticate, function(req, res) {
   // Pass in request object that includes user id, trip object id, activity object
   console.log('Received the following POST request to create an itinerary item: ', req.body);
   User.findById(req.body.user_id, function(err, user) {
@@ -119,7 +119,7 @@ app.post('/api/itineraries', /*authenticate,*/ function(req, res) {
 // Set up POST request listener for creating a new activity
 // Expects to receive user_id, trip_id, and activity in req.body,
 // where activity is an object with description and category properties
-app.post('/api/activities', /*authenticate,*/ function(req, res) {
+app.post('/api/activities', authenticate, function(req, res) {
   // Pass in request object that includes user id, trip object id, activity object
   console.log('Received the following POST request to create an activity: ', req.body);
   User.findById(req.body.user_id, function(err, user) {
@@ -137,7 +137,7 @@ app.post('/api/activities', /*authenticate,*/ function(req, res) {
 
 // Set up DELETE request listener for deleting an activity
 // Expects to receive user_id, trip_id, and activity_id in req.body
-app.delete('/api/activities', /*authenticate,*/ function(req, res) {
+app.delete('/api/activities', authenticate, function(req, res) {
   console.log('Received the following DELETE request to delete an activity: ', req.body);
   // Call Mongoose remove method on id matching the request
   User.findById(req.body.user_id, function(err, user) {
