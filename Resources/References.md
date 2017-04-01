@@ -12,6 +12,11 @@
 ## Research
 
 * [MongoDB Embed vs. Reference](https://docs.google.com/presentation/d/1hAJnl3J0KG01q5FUi8wPeTF7Y-bINZlaKylPbThaw7M/edit#slide=id.p)
+* [Mongoose Schema Basics](http://coursework.vschool.io/mongoose-schemas/)
+* [Mongoose Population](http://mongoosejs.com/docs/populate.html)
+* [50 Tips and Tricks for MongoDB Developers: Chapter 1. Application Design Tips](https://www.safaribooksonline.com/library/view/50-tips-and/9781449306779/ch01.html)
+* [Model One-to-Many Relationships with  Document References](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
+* [MongoDB Datatypes](https://www.tutorialspoint.com/mongodb/mongodb_datatype.htm)
 * [Invalid Value for Schema Array Path](http://stackoverflow.com/questions/30856208/invalid-value-for-schema-array-path)
 
 
