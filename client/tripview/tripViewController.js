@@ -11,28 +11,40 @@ angular.module('tripViewModule', [
   ];
   $scope.suggestions = [
     {
-      yelpBusinessName: 'Business 1',
-      yelpUrl: 'YELP URL',
-      yelpRating: 4.5,
-      yelpPriceRange: '$$$',
-      yelpID: 'THIS SHOULD BE YELP ID',
-      yelpReviewCount: 301,
-      yelpImage: 'THIS SHOULD BE AN IMAGE LINK',
+      yelpBusinessName: 'The Temporarium Coffee & Tea',
+      yelpUrl: 'https://www.yelp.com/biz/the-temporarium-coffee-and-tea-san-francisco?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+      yelpRating: 5,
+      yelpPriceRange: '$',
+      yelpID: 'the-temporarium-coffee-and-tea-san-francisco',
+      yelpReviewCount: 128,
+      yelpImage: 'https://s3-media4.fl.yelpcdn.com/bphoto/6KUXPGhWFhUo1SfEwCCr7Q/o.jpg',
       totalLikes: 10,
       description: 'Description 1',
-      category: 'Category 1'
+      category: 'coffee'
     },
     {
-      yelpBusinessName: 'Business 2',
-      yelpUrl: 'YELP URL',
-      yelpRating: 5,
+      yelpBusinessName: 'DeSano Pizza bakery',
+      yelpUrl: 'https://www.yelp.com/biz/desano-pizza-bakery-los-angeles?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+      yelpRating: 4.5,
       yelpPriceRange: '$$',
-      yelpID: 'THIS SHOULD BE YELP ID',
-      yelpReviewCount: 3022,
-      yelpImage: 'THIS SHOULD BE AN IMAGE LINK',
-      totalLikes: 31,
+      yelpID: 'desano-pizza-bakery-los-angeles',
+      yelpReviewCount: 620,
+      yelpImage: 'https://s3-media2.fl.yelpcdn.com/bphoto/51Ew_R8Cpk1MlA3jZXaXqA/o.jpg',
+      totalLikes: 3,
       description: 'Description 2',
-      category: 'Category 2'
+      category: 'restaurants'
+    },
+    {
+      yelpBusinessName: 'Wanderlust Creamery',
+      yelpUrl: 'https://www.yelp.com/biz/wanderlust-creamery-los-angeles-2?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+      yelpRating: 4.5,
+      yelpPriceRange: '$',
+      yelpID: '"wanderlust-creamery-los-angeles-2"',
+      yelpReviewCount: 48,
+      yelpImage: 'https://s3-media3.fl.yelpcdn.com/bphoto/Rydcljn2hHBl-lqNCmVzyw/o.jpg',
+      totalLikes: 5,
+      description: 'Description 3',
+      category: 'desserts'
     }
   ];
 
@@ -71,10 +83,9 @@ angular.module('tripViewModule', [
   $scope.reviews = [];
   $scope.morePhotos = [];
   $scope.showAdditionalInfo = false;
-
-  $scope.categories = '';
-  $scope.term = '';
-  $scope.location = 'san francisco, ca';
+  $scope.categories = 'coffee';
+  $scope.term = 'peets';
+  $scope.location = 'Los Angeles, CA, USA';
 
   // Watches for changes in the carousel
   $scope.$watch('active', function(index) {
@@ -93,6 +104,10 @@ angular.module('tripViewModule', [
     $scope.active = 1;
     // Hide header until new review/photo results are in
     $scope.showAdditionalInfo = false;
+
+    console.log($scope.term);
+    console.log($scope.location);
+    console.log($scope.categories);
 
     return $http({
       method: 'POST',

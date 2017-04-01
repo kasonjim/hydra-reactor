@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding-left: 0;
   height: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 header h1 {
@@ -254,7 +254,6 @@ div.footer {
   font-size: 36px;
   font-weight: bold;
   color: white;
-  margin-bottom: 30px;
 }
 
 #logout {
