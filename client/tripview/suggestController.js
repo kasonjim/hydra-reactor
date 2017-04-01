@@ -3,7 +3,9 @@ angular.module('suggestModule', [
 ])
 
 .controller('suggestController', ['$scope', '$http', function($scope, $http) {
+  // current carousel item index
   $scope.active = 0;
+  $scope.businessRating = 0;
 
   $scope.allCategories = [];  // "title" is shown on page, "alias" is the category value
   $scope.results = [];
@@ -15,10 +17,12 @@ angular.module('suggestModule', [
   $scope.term = '';
   $scope.location = 'san francisco, ca';
 
+  // Watches for changes in the carousel
   $scope.$watch('active', function(index) {
     if ($scope.results.length !== 0) {
       // Hide header until new review/photo results are in
       $scope.showAdditionalInfo = false;
+      $scope.businessRating = $scope.results[index].rating;
       $scope.businessDetails(index);
     }
   });
@@ -44,11 +48,35 @@ angular.module('suggestModule', [
         sort_by: 'best_match',
         price: '1,2,3,4'
       }
-    }).then( (res) => {
+    }).then( res => {
       console.log('search results', res.data);
       $scope.results = res.data;
       $scope.active = 0;
     });
+  };
+
+  $scope.add = function() {
+    var currentBusiness = $scope.results[$scope.active];
+    var businessData = {
+      yelpBusinessName: currentBusiness.name,
+      yelpUrl: currentBusiness.url,
+      yelpRating: currentBusiness.rating,
+      yelpPriceRange: currentBusiness.price,
+      yelpID: currentBusiness.id,
+      yelpReviewCount: currentBusiness.review_count,
+      yelpImage: currentBusiness.image_url,
+      totalLikes: 0,
+      description: 'no description',
+      category: $scope.categories.alias
+    };
+    console.log('business data', businessData);
+    // return $http({
+    //   method: 'POST',
+    //   url: '/api/activities',
+    //   data: businessData
+    // }).then( res => {
+
+    // });
   };
 
   // Get more details on the specific business (for now, you click on the image)
@@ -56,10 +84,13 @@ angular.module('suggestModule', [
     return $http({
       method: 'POST',
       url: '/api/yelpBusiness',
+      headers: {
+        'x-auth': sessionStorage.getItem('auth')
+      },
       data: {
         id: $scope.results[index].id
       }
-    }).then( (res) => {
+    }).then( res => {
       // console.log('more details', res.data);
       $scope.reviews = res.data.reviews;
       $scope.morePhotos = res.data.details.photos;
@@ -72,12 +103,12 @@ angular.module('suggestModule', [
     return $http({
       method: 'GET',
       url: '../lib/categories.json'
-    }).then( (res) => {
+    }).then( res => {
       $scope.allCategories = res.data.map( category => {
         return { alias: category.alias, title: category.title };
       });
       // console.log($scope.allCategories);
-    }).catch( (err) => {
+    }).catch( err => {
       console.error('error: ', err);
     });
   };

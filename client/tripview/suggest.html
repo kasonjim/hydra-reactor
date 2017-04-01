@@ -10,7 +10,8 @@
 
   <label>Location (This will be the location of the trip in the future)</label>
   <input ng-model="location" placeholder="Location" class="form-control" /><br />
-  <button class="btn btn-primary" ng-click="search()">SEARCH!</button><br /><br />
+  <button class="btn btn-primary" ng-click="search()">SEARCH</button><br /><br />
+  <button class="btn btn-danger" ng-click="add()">ADD</button><br /><br />
 
   <div style="height: 300px; width: 700px">
     <h4>Showing top {{results.length}} results</h4>
@@ -20,7 +21,7 @@
         <div class="carousel-caption" style="background-color: rgba(30,30,30,0.8)">
           <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
           {{result.location.display_address.join(', ')}}<br />
-          {{result.rating}} stars with {{result.review_count}} reviews<br />
+          Rating: {{result.rating}}/5 with {{result.review_count}} reviews<br />
         </div>
       </div>
     </div>
@@ -30,7 +31,7 @@
         <img ng-src="{{review.user.image_url}}" style="height: 100px"> <br />
         {{review.user.name}}<br />
         {{review.text}} (Posted on {{review.time_created}})<br />
-        {{review.rating}} stars (<a href="{{review.url}}" target="_blank">Read full review</a>)<br />
+        Rating: {{review.rating}}/5 stars (<a href="{{review.url}}" target="_blank">Read full review</a>)<br />
       </div>
       <!--
       <div uib-carousel active="0">
