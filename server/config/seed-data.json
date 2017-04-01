@@ -5,211 +5,246 @@
       "firstName": "Danya",
       "lastName": "Smith",
       "email": "danyadsmith@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "alexm": {
       "firstName": "Alex",
       "lastName": "Moores",
       "email": "moores.alexd@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "alexr": {
       "firstName": "Alexander",
       "lastName": "Rosenthal",
       "email": "alexrosenthalster@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "ariel": {
       "firstName": "Ariel",
       "lastName": "Salem",
       "email": "areil.salem1989@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "bryce": {
       "firstName": "Bryce",
       "lastName": "Dooley",
       "email": "brycehdooley@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "chris": {
       "firstName": "Chris",
       "lastName": "Abrami",
       "email": "chrisabrami@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "darin": {
       "firstName": "Darin",
       "lastName": "Allen",
       "email": "darinallen@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "dimitri": {
       "firstName": "Dimitri",
       "lastName": "Temkin",
       "email": "dimitri.temkin@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "emilie": {
       "firstName": "Emilie",
       "lastName": "Hester",
       "email": "emiliehester@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "emma": {
       "firstName": "Emma",
       "lastName": "Rios",
       "email": "tigersoundtracks@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "faiz": {
       "firstName": "Faiz",
       "lastName": "Mohammed",
       "email": "faizmohammed178@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "james": {
       "firstName": "James",
       "lastName": "Mitchell",
       "email": "mithell.thehumantornado@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "jason": {
       "firstName": "Jason",
       "lastName": "Kim",
       "email": "kasonjim@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "jessed": {
       "firstName": "Jesse",
       "lastName": "Deoms",
       "email": "jesse.deoms@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "jesseh": {
       "firstName": "Jesse",
       "lastName": "Hill",
       "email": "jsnahill@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "joanna": {
       "firstName": "Joanna",
       "lastName": "Wheeler",
       "email": "joannachristinewheeler@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "jordan": {
       "firstName": "Jordan",
       "lastName": "Stubblefield",
       "email": "jstubblefield7939@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "kyle": {
       "firstName": "Kyle",
       "lastName": "Anson",
       "email": "kyle.anson7@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "lou": {
       "firstName": "Lou",
       "lastName": "Kaileh",
       "email": "lkaileh@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "max": {
       "firstName": "Max",
       "lastName": "Berger",
       "email": "maxamillianberger@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "meg": {
       "firstName": "Meg",
       "lastName": "Viar",
       "email": "Lmegviar@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "misaki": {
       "firstName": "Misaki",
       "lastName": "Matsumoto",
       "email": "misaki.matsumoto2524@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "mohammad": {
       "firstName": "Mohammad",
       "lastName": "Farooqi",
       "email": "mohammad.faroqi@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "nate": {
       "firstName": "Nate",
       "lastName": "Nault",
       "email": "nate@nathannault.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "nathan": {
       "firstName": "Nathan",
       "lastName": "Brewer-Davis",
       "email": "10ndavis10@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "ignacio": {
       "firstName": "Ignacio",
       "lastName": "Palma Balboa",
       "email": "naxopalma@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "preston": {
       "firstName": "Preston",
       "lastName": "Moore",
       "email": "caroham29@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "rochelle": {
       "firstName": "Rochelle",
       "lastName": "Valdez",
       "email": "rochellevee@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "ryanf": {
       "firstName": "Ryan",
       "lastName": "Freude",
       "email": "freudehack@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "ryanp": {
       "firstName": "Ryan",
       "lastName": "Perry",
       "email": "Rperry2174@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "samy": {
       "firstName": "Samy",
       "lastName": "Kebaish",
       "email": "skebaish1992@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "sean": {
       "firstName": "Sean",
       "lastName": "Ellison-Chen",
       "email": "nihilates@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "shane": {
       "firstName": "Shane",
       "lastName": "Tanguis",
       "email": "shanetanguis@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "simon": {
       "firstName": "Simon",
       "lastName": "DeMoor",
       "email": "simondemoor0@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     },
     "vandeth": {
       "firstName": "Vandeth",
       "lastName": "Nop",
       "email": "vnop14@gmail.com",
-      "password": "password"
+      "password": "password",
+      "token": {}
     }
   },
   "trips": {
