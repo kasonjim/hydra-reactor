@@ -11,7 +11,7 @@ h1 {
   display: inline-block;
   margin: 0 auto;
   position: relative;
-  top: 80px;
+  top: 20px;
 }
 .logo {
   width: 150px;
@@ -21,7 +21,7 @@ h1 {
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
-  top: 65px;
+  top: 15px;
 }
 .activity-group {
   position: relative;
@@ -154,9 +154,9 @@ h1 {
   background: url(caribbean.jpeg) no-repeat center top;
 }
 .hero-banner {
-  text-align: center;
+  text-align: left;
   height: 100px;
-  margin-bottom: 200px;
+  margin-bottom: 70px;
   display: inline-block;
 }
 div.form-group {
