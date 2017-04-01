@@ -68,6 +68,16 @@
     "response": "",
     "data":
   },
+  "PUT /api/itineraries": {
+    "desc": "Edits an event on the itinerary.",
+    "response": "",
+    "data":
+  },
+  "DELETE /api/itineraries": {
+    "desc": "Removes an event from the itinerary.",
+    "response": "",
+    "data":
+  },
   "POST /api/activities": {
     "desc": "Creates a new activity.",
     "response": "",
@@ -77,6 +87,15 @@
     "desc": "Deletes an activity.",
     "response": "",
     "data":
+  },
+  "POST /api/activities/:id/likes": {
+    "desc": "Increments/Decrements the number of likes for a specific activity and adds/removes the user to activity.likedBy",
+    "response": "",
+    "data": {
+      "expects": {
+        "type": "add or remove"
+      }
+    }
   },
   "POST /api/yelpSearch": {
     "desc": "",
@@ -88,9 +107,70 @@
     "response": "",
     "data":
   },
-  "VERB /api/route": {
-    "desc": "",
+  "POST /api/trips/:id/users": {
+    "desc": "Adds a user to a trip. Checks to see if the user exists. If it does, ad the User ID to the trips's users collection. If not, create the user and add it to the trip's users collection.",
     "response": "",
     "data":
   },
+  "POST /api/users/trips": {
+    "desc": "Adds a trip to a user",
+    "response": "",
+    "data":
+  },
+  "PUT /api/users": {
+    "desc": "Allows an invited user to complete registration process",
+    "response": "",
+    "data":
+  },
+  "POST /api/locations": {
+    "desc": "Gets Location Data from Google Places API",
+    "response": "",
+    "data": {
+      "expects": "https://maps.googleapis.com/maps/api/place/textsearch/json?query=San%20Francisco&key=YOURAPIKEY",
+      "returns": {
+        "html_attributions": [],
+        "results": [
+          {
+            "formatted_address": "San Francisco, CA, USA",
+            "geometry": {
+              "location": {
+                "lat": 37.7749295,
+                "lng": -122.4194155
+              },
+              "viewport": {
+                "northeast": {
+                  "lat": 37.812,
+                  "lng": -122.3482
+                },
+                "southwest": {
+                  "lat": 37.70339999999999,
+                  "lng": -122.527
+                }
+              }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "1b9ea3c094d3ac23c9a3afa8cd4d8a41f05de50a",
+            "name": "San Francisco",
+            "photos": [
+              {
+                "height": 2118,
+                "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/102117093789730100872/photos\">Jean Michel DHAINAUT</a>"
+                ],
+                "photo_reference": "CoQBdwAAADP4KmMrX9nd3cYt9kuNeujErDbBOmRNC5EORHUt8RPg-ClJhaj6p0JAeyDiGkHETYSYnevmuG52VKoiDGskG3jRpruE8CAmTnxM563Z9TgQO9PrluUhCZylHq2WKxVFZfC1audhH0a-MRU1jX0oZ1_6kt4omXXBiZRnoFZXBiKoEhB2e8lqF2pLyny9ZfIDCeY8GhTdUx2VQi0FPub3KHXSaDnLkf0JZg",
+                "width": 3765
+              }
+            ],
+            "place_id": "ChIJIQBpAG2ahYAR_6128GcTUEo",
+            "reference": "CmRbAAAAVl7VGdYBi7MpLg3HbPm3mVbTu8U5_UjkkTEwsxc2WrshIKy9EdWjm8MgOarFpqUk7uxwEz_8iQ5j_GbSCO-vr2kPYbNiK1wA4mTlztqC0GYWe2nEelbeGII7AKxTOUNWEhDda3JWJNotTYHTXUOVxTCQGhSpGGsVVYdh5CaFQhEm96BxhldOTg",
+            "types": [
+              "locality",
+              "political"
+            ]
+          }
+        ],
+        "status": "OK"
+      }
+    }
+  }
 }

@@ -1,14 +1,33 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var mongoose = require('mongoose');
-var User = require('./models/userModel.js');
+const bodyParser = require('body-parser');
+const chalk = require('chalk');
+const config = require('./config');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+const request = require('request');
+const yelpFusion = require('yelp-fusion');
+const User = require('./models/userModel.js');
 
 // We used ES6 syntax with the Authenticate middleware because it was easier to build with and understand
+
+
 var {authenticate} = require('./middleware/authenticate');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+var defaultHeaders = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET, POST, PUT, OPTIONS, DELETE',
+  'access-control-allow-headers': 'content-type, accept',
+  'access-control-max-age': 10
+};
+
+app.use(function (req, res, next) {
+  res.set(defaultHeaders);
+  res.set('x-xss-protection', 0);
+  next();
+});
 // Comment out one of the two following lines, depending on which database you are using
 
 if (process.env.DATABASE_URL) {
@@ -55,7 +74,7 @@ app.post('/api/signin', function(req, res) {
   });
 });
 
-app.get('/api/users', authenticate, (req, res) => {
+app.get('/api/users', /* authenticate,*/ (req, res) => {
   res.status(200).send(req.user);
 });
 
@@ -69,7 +88,7 @@ app.delete('/api/token', authenticate, (req, res) => {
 
 // Set up POST request listener for creating a new trip
 // Expects to receive user_id and trip in req.body, where trip is an object with a tripName property
-app.post('/api/trips', authenticate, function(req, res) {
+app.post('/api/trips', /*authenticate,*/ function(req, res) {
   console.log('Received the following POST request to create a trip: ', req.body);
   // Mongoose method to retrieve and update a user
   User.findOneAndUpdate({'_id': req.body.user_id}, {$push: { trips: { tripName: req.body.trip.tripName } } }, {new: true}, function(err, user) {
@@ -81,7 +100,7 @@ app.post('/api/trips', authenticate, function(req, res) {
   });
 });
 
-app.post('/api/itineraries', authenticate, function(req, res) {
+app.post('/api/itineraries', /*authenticate,*/ function(req, res) {
   // Pass in request object that includes user id, trip object id, activity object
   console.log('Received the following POST request to create an itinerary item: ', req.body);
   User.findById(req.body.user_id, function(err, user) {
@@ -100,7 +119,7 @@ app.post('/api/itineraries', authenticate, function(req, res) {
 // Set up POST request listener for creating a new activity
 // Expects to receive user_id, trip_id, and activity in req.body,
 // where activity is an object with description and category properties
-app.post('/api/activities', authenticate, function(req, res) {
+app.post('/api/activities', /*authenticate,*/ function(req, res) {
   // Pass in request object that includes user id, trip object id, activity object
   console.log('Received the following POST request to create an activity: ', req.body);
   User.findById(req.body.user_id, function(err, user) {
@@ -118,7 +137,7 @@ app.post('/api/activities', authenticate, function(req, res) {
 
 // Set up DELETE request listener for deleting an activity
 // Expects to receive user_id, trip_id, and activity_id in req.body
-app.delete('/api/activities', authenticate, function(req, res) {
+app.delete('/api/activities', /*authenticate,*/ function(req, res) {
   console.log('Received the following DELETE request to delete an activity: ', req.body);
   // Call Mongoose remove method on id matching the request
   User.findById(req.body.user_id, function(err, user) {
@@ -134,15 +153,12 @@ app.delete('/api/activities', authenticate, function(req, res) {
   });
 });
 
-const yelp = require('yelp-fusion');
-const access_token = process.env.YELP_TOKEN;
-const client = yelp.client(access_token);
-
+const yelp = yelpFusion.client(config.yelpToken);
 
 app.post('/api/yelpSearch', function(req, res) {
   var searchQuery = req.body;
 
-  client.search(searchQuery).then(response => {
+  yelp.search(searchQuery).then(response => {
     res.status(200).send(response.jsonBody.businesses);
   }).catch(e => { console.log(e); });
 });
@@ -150,10 +166,10 @@ app.post('/api/yelpSearch', function(req, res) {
 app.post('/api/yelpBusiness', function(req, res) {
   var id = req.body.id;
   var moreInfo = {};
-  client.business(id)
+  yelp.business(id)
     .then(response => {
       moreInfo['details'] = response.jsonBody;
-      client.reviews(req.body.id)
+      yelp.reviews(req.body.id)
         .then(response => {
           moreInfo['reviews'] = response.jsonBody.reviews;
           res.status(200).send(moreInfo);
@@ -162,8 +178,38 @@ app.post('/api/yelpBusiness', function(req, res) {
 });
 
 
+
+app.post('/api/locations', function (req, res) {
+  var chunks = [];
+  var query = req.body.query;
+  var queryUrl = config.gpPlaceTextSearchUrl + '/' + config.gpOutputFormat + '?query=' + query + '&key=' + config.gpApiKey;
+  console.log(chalk.yellow('Querying Google Places API with: ', query));
+  console.log(chalk.yellow(queryUrl));
+  request.post(queryUrl)
+    .on('response', function (response) {
+      console.log('Status: ', response.statusCode);
+      //console.log('Headers: ', response.headers['content-type']);
+      console.log(chalk.white(JSON.stringify(response, null, 2)));
+      //res.send(response);
+    })
+    .on('data', function (chunk) {
+      chunks.push(chunk);
+    })
+    .on('end', function () {
+      var body = Buffer.concat(chunks);
+      console.log(chalk.white(body));
+      res.send(body);
+    })
+});
+
+
 var port = process.env.PORT || 3000;
 // var ip = process.env.IP || 'localhost';
+
+app.use(function (err, req, res, next) {
+  console.error('ERROR: ', err);
+  res.send(err);
+});
 
 app.listen(port, function() {
   console.log('Listening on port ' + port);
