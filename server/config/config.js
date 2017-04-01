@@ -9,9 +9,9 @@ exports.gpPhotoMaxWidth = '1080';
 exports.yelpToken = process.env.YELP_TOKEN;
 
 // DATABASE CONFIGURATION
-exports.dbUri = process.env.MONGODB_URI_HYDRA;
-exports.dbUser = process.env.MONGODB_HYDRA_USER;
-exports.dbPwd = process.env.MONGODB_HYDRA_PWD;
+exports.dbUri = process.env.MONGODB_URI_HYDRA || 'mongodb://localhost/hydra';
+exports.dbUser = process.env.MONGODB_HYDRA_USER || 'hydra_admin';
+exports.dbPwd = process.env.MONGODB_HYDRA_PWD || '';
 
 // SERVER
 exports.port = process.env.PORT || 3000;

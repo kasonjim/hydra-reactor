@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
-const config = require('./config');
+const config = require('./config/config');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -28,19 +28,8 @@ app.use(function (req, res, next) {
   res.set('x-xss-protection', 0);
   next();
 });
-// Comment out one of the two following lines, depending on which database you are using
 
-if (process.env.DATABASE_URL) {
-  mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
-} else {
-  try {
-    mongoose.connect('mongodb://localhost/hydra');
-  } catch (err) {
-    mongoose.createConnection('mongodb://localhost/hydra');
-  }
-}
-var db = mongoose.connection;
-
+require('./config/db');
 
 app.use(express.static(path.join(__dirname, '../client/')));
 
