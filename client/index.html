@@ -15,19 +15,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
   </head>
   <body>
-    <div ng-app="signinSplash">
-      <div ng-controller="logoutController">
-        <button id="logout" class="btn btn-primary btn-lg" ng-click="logout()">Logout</button>
-      </div>
-      <a href="#/dashboard">
-        <div class="hero-banner">
-          <h1>hydra</h1><img class="logo" src="images/hydra-travel.png"><h1>travel</h1>
+      <div ng-app="signinSplash">
+        <div class="top-bar" ng-controller="logoutController">
+          <button id="logout" class="btn btn-primary btn-lg" ng-click="logout()">Logout</button>
         </div>
-      </a>
-      <div ng-view></div>
-      <div class="footer">
-        <footer>hail hydra, one trip at a time.</footer>
-      </div>
+        <div class="container">
+          <header class="hero-banner row col-md-12">
+            <a href="#/dashboard">
+              <h1>
+                <img class="logo" src="images/hydra-travel-logo.png" alt="Hydra Travel Logo">
+                Hydra Travel
+              </h1>
+            </a>
+          </header>
+          <div ng-view></div>
+          <div class="footer row col-md-12">
+            <footer>hail hydra, one trip at a time.</footer>
+          </div>
+        </div>
     </div>
   <script src="routes.js"></script>
   <script src="signin/signin-controller.js"></script>
