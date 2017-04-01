@@ -83,12 +83,16 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         userData.value = response.data;
         // save JWT token in local sessionStorage
         // setItem and getItem are methods on the sessionStorage object
-        sessionStorage.setItem('auth', response.data.tokens[0].token);
+        sessionStorage.setItem('x-auth', response.data.tokens[0].token);
         window.location.href = '#/dashboard';
       }, function errorCallback(error) {
         console.log('error!', error);
       });
   };
+
+  // var logout = function() {
+  //   sessionStorage.removeItem('auth');
+  // };
 
   var newTrip = function(user_id, tripName) {
     var req = {
@@ -200,6 +204,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
     newActivity: newActivity,
     deleteActivity: deleteActivity,
     signIn: signIn,
+   // logout: logout,
     setTripIndex: setTripIndex,
     currentTripIndex: currentTripIndex,
     go: go

@@ -158,6 +158,7 @@ h1 {
   height: 100px;
   margin-bottom: 70px;
   display: inline-block;
+  position: relative;
 }
 div.form-group {
   position: relative;
@@ -250,7 +251,7 @@ div.footer {
   margin-bottom: 30px;
 }
 
-.form-logout {
+#logout {
   position: relative;
   float: right;
 }
