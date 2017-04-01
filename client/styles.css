@@ -5,16 +5,13 @@ body {
   height: 100%;
   text-align: center;
 }
-h1 {
-  font-family: 'Aclonica', sans-serif;
-  color: white;
-  display: inline-block;
-  margin: 0 auto;
-  position: relative;
-  top: 20px;
+
+header h1 {
+  color: transparent;
+  font-size: 0px;
 }
-.logo {
-  width: 150px;
+header .logo {
+  width: 300px;
   height: auto;
   display: inline-block;
   margin: 0 auto;
@@ -23,6 +20,15 @@ h1 {
   position: relative;
   top: 15px;
 }
+h1 {
+  font-family: 'Aclonica', sans-serif;
+  color: white;
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+
 .activity-group {
   position: relative;
   top: 140px;
