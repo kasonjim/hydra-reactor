@@ -9,8 +9,8 @@ var options = {
   password: config.dbPwd
 };
 
-if (process.env.DATABASE_URL) {
-  mongoose.connect('mongodb://heroku_0fn1fg98:vi2sk4eagfo3dj3pbg1407vr0l@ds133450.mlab.com:33450/heroku_0fn1fg98/hydra');
+if (process.env.MONGODB_URI) {
+  mongoose.connect(MONGODB_URI);
 } else {
   mongoose.connect(uri, options);
 }
@@ -20,7 +20,3 @@ connection.once('open', function () {
   console.log(chalk.green.bold('MongoDB connection established successfully!'));
   console.log(chalk.blue('MongoDB Using Database: ', connection.db.s.databaseName));
 });
-
-
-
-
