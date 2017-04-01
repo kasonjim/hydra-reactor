@@ -83,7 +83,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
         userData.value = response.data;
         // save JWT token in local sessionStorage
         // setItem and getItem are methods on the sessionStorage object
-        sessionStorage.setItem('x-auth', response.data.tokens[0].token);
+        sessionStorage.setItem('auth', response.data.tokens[0].token);
         window.location.href = '#/dashboard';
       }, function errorCallback(error) {
         console.log('error!', error);
