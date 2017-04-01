@@ -41,8 +41,8 @@ const yelpController = require('./controllers/yelp');
 app.post('/api/yelpSearch', yelpController.keywordSearch);
 app.post('/api/yelpBusiness', yelpController.businessSearch);
 
-const locationsController = require('./controllers/locations');
-app.post('/api/locations', locationsController.getLocations);
+const googlePlacesController = require('./controllers/googleplaces');
+app.post('/api/locations', googlePlacesController.getLocations);
 
 app.use(function (err, req, res, next) {
   console.error(chalk.red.bold('ERROR: ', err));
