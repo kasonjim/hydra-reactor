@@ -7,10 +7,10 @@ angular.module('logoutModule', []).controller('logoutController', ['$scope', '$h
       return true;
     }
   }
-  
+
   $scope.logout = function () {
     sessionStorage.removeItem('x-auth');
     sessionStorage.removeItem('auth');
-    window.location.href = 'index.html';
-  }  
+    window.location.href = '';
+  }
 }]);
