@@ -1,0 +1,237 @@
+{
+  "users": {
+    "_model": "User",
+    "danya": {
+      "firstName": "Danya",
+      "lastName": "Smith",
+      "email": "danyadsmith@gmail.com",
+      "password": "password"
+    },
+    "alexm": {
+      "firstName": "Alex",
+      "lastName": "Moores",
+      "email": "moores.alexd@gmail.com",
+      "password": "password"
+    },
+    "alexr": {
+      "firstName": "Alexander",
+      "lastName": "Rosenthal",
+      "email": "alexrosenthalster@gmail.com",
+      "password": "password"
+    },
+    "ariel": {
+      "firstName": "Ariel",
+      "lastName": "Salem",
+      "email": "areil.salem1989@gmail.com",
+      "password": "password"
+    },
+    "bryce": {
+      "firstName": "Bryce",
+      "lastName": "Dooley",
+      "email": "brycehdooley@gmail.com",
+      "password": "password"
+    },
+    "chris": {
+      "firstName": "Chris",
+      "lastName": "Abrami",
+      "email": "chrisabrami@gmail.com",
+      "password": "password"
+    },
+    "darin": {
+      "firstName": "Darin",
+      "lastName": "Allen",
+      "email": "darinallen@gmail.com",
+      "password": "password"
+    },
+    "dimitri": {
+      "firstName": "Dimitri",
+      "lastName": "Temkin",
+      "email": "dimitri.temkin@gmail.com",
+      "password": "password"
+    },
+    "emilie": {
+      "firstName": "Emilie",
+      "lastName": "Hester",
+      "email": "emiliehester@gmail.com",
+      "password": "password"
+    },
+    "emma": {
+      "firstName": "Emma",
+      "lastName": "Rios",
+      "email": "tigersoundtracks@gmail.com",
+      "password": "password"
+    },
+    "faiz": {
+      "firstName": "Faiz",
+      "lastName": "Mohammed",
+      "email": "faizmohammed178@gmail.com",
+      "password": "password"
+    },
+    "james": {
+      "firstName": "James",
+      "lastName": "Mitchell",
+      "email": "mithell.thehumantornado@gmail.com",
+      "password": "password"
+    },
+    "jason": {
+      "firstName": "Jason",
+      "lastName": "Kim",
+      "email": "kasonjim@gmail.com",
+      "password": "password"
+    },
+    "jessed": {
+      "firstName": "Jesse",
+      "lastName": "Deoms",
+      "email": "jesse.deoms@gmail.com",
+      "password": "password"
+    },
+    "jesseh": {
+      "firstName": "Jesse",
+      "lastName": "Hill",
+      "email": "jsnahill@gmail.com",
+      "password": "password"
+    },
+    "joanna": {
+      "firstName": "Joanna",
+      "lastName": "Wheeler",
+      "email": "joannachristinewheeler@gmail.com",
+      "password": "password"
+    },
+    "jordan": {
+      "firstName": "Jordan",
+      "lastName": "Stubblefield",
+      "email": "jstubblefield7939@gmail.com",
+      "password": "password"
+    },
+    "kyle": {
+      "firstName": "Kyle",
+      "lastName": "Anson",
+      "email": "kyle.anson7@gmail.com",
+      "password": "password"
+    },
+    "lou": {
+      "firstName": "Lou",
+      "lastName": "Kaileh",
+      "email": "lkaileh@gmail.com",
+      "password": "password"
+    },
+    "max": {
+      "firstName": "Max",
+      "lastName": "Berger",
+      "email": "maxamillianberger@gmail.com",
+      "password": "password"
+    },
+    "meg": {
+      "firstName": "Meg",
+      "lastName": "Viar",
+      "email": "Lmegviar@gmail.com",
+      "password": "password"
+    },
+    "misaki": {
+      "firstName": "Misaki",
+      "lastName": "Matsumoto",
+      "email": "misaki.matsumoto2524@gmail.com",
+      "password": "password"
+    },
+    "mohammad": {
+      "firstName": "Mohammad",
+      "lastName": "Farooqi",
+      "email": "mohammad.faroqi@gmail.com",
+      "password": "password"
+    },
+    "nate": {
+      "firstName": "Nate",
+      "lastName": "Nault",
+      "email": "nate@nathannault.com",
+      "password": "password"
+    },
+    "nathan": {
+      "firstName": "Nathan",
+      "lastName": "Brewer-Davis",
+      "email": "10ndavis10@gmail.com",
+      "password": "password"
+    },
+    "ignacio": {
+      "firstName": "Ignacio",
+      "lastName": "Palma Balboa",
+      "email": "naxopalma@gmail.com",
+      "password": "password"
+    },
+    "preston": {
+      "firstName": "Preston",
+      "lastName": "Moore",
+      "email": "caroham29@gmail.com",
+      "password": "password"
+    },
+    "rochelle": {
+      "firstName": "Rochelle",
+      "lastName": "Valdez",
+      "email": "rochellevee@gmail.com",
+      "password": "password"
+    },
+    "ryanf": {
+      "firstName": "Ryan",
+      "lastName": "Freude",
+      "email": "freudehack@gmail.com",
+      "password": "password"
+    },
+    "ryanp": {
+      "firstName": "Ryan",
+      "lastName": "Perry",
+      "email": "Rperry2174@gmail.com",
+      "password": "password"
+    },
+    "samy": {
+      "firstName": "Samy",
+      "lastName": "Kebaish",
+      "email": "skebaish1992@gmail.com",
+      "password": "password"
+    },
+    "sean": {
+      "firstName": "Sean",
+      "lastName": "Ellison-Chen",
+      "email": "nihilates@gmail.com",
+      "password": "password"
+    },
+    "shane": {
+      "firstName": "Shane",
+      "lastName": "Tanguis",
+      "email": "shanetanguis@gmail.com",
+      "password": "password"
+    },
+    "simon": {
+      "firstName": "Simon",
+      "lastName": "DeMoor",
+      "email": "simondemoor0@gmail.com",
+      "password": "password"
+    },
+    "vandeth": {
+      "firstName": "Vandeth",
+      "lastName": "Nop",
+      "email": "vnop14@gmail.com",
+      "password": "password"
+    }
+  },
+  "trips": {
+    "_model": "Trip",
+    "vegas": {
+      "tripName": "Vegas, Baby!",
+      "shortDescription": "The women of HRR22 are planning a trip to Vegas in 2018.",
+      "location": "Las Vegas, NV",
+      "imageUrl": "",
+      "planner": "->users.danya"
+    },
+    "hrr": {
+      "tripName": "HRR22 World Tour",
+      "shortDescription": "Let's travel the world and meet our cohort mates.",
+      "location": "Cabo San Lucas, Mexico",
+      "imageUrl": "",
+      "planner": "->users.jason",
+      "users": [
+         "->users.danya",
+         "->users.joanna",
+         "->users.lou"
+      ]
+    }
+  }
+}
