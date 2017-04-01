@@ -10,6 +10,7 @@ exports.yelpToken = process.env.YELP_TOKEN;
 
 // DATABASE CONFIGURATION
 exports.dbUri = process.env.MONGODB_URI_HYDRA || 'mongodb://localhost/hydra';
+exports.dbRedesignUri = 'mongodb://localhost/hydra-redesign';
 exports.dbUser = process.env.MONGODB_HYDRA_USER || 'hydra_admin';
 exports.dbPwd = process.env.MONGODB_HYDRA_PWD || '';
 

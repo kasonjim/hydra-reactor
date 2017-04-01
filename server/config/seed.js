@@ -4,7 +4,7 @@ const seeder = require('mongoose-seeder');
 const mongoose = require('mongoose');
 const connection = mongoose.connection;
 
-const uri = config.dbUri;
+const uri = config.dbRedesignUri;
 const options = {
   user: config.dbUser,
   password: config.dbPwd
