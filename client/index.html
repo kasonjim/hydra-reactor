@@ -16,7 +16,7 @@
   </head>
   <body>
       <div ng-app="signinSplash">
-        <div class="top-bar" ng-controller="logoutController">
+        <div class="top-bar" ng-hide="check()" ng-controller="logoutController">
           <button id="logout" class="btn btn-primary btn-lg" ng-click="logout()">Logout</button>
         </div>
         <div class="container">
