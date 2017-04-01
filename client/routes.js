@@ -6,7 +6,8 @@ angular.module('signinSplash', [
   'dashboardModule',
   'tripCreatorModule',
   'tripViewModule',
-  'suggestModule'
+  'suggestModule',
+  'logoutModule'
 ])
 
 .config(function($routeProvider, $locationProvider) {
