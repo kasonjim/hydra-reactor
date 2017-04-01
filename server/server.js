@@ -3,9 +3,6 @@ const config = require('./config/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-const User = require('./models/userModel.js');
-
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -53,6 +50,6 @@ app.use(function (err, req, res, next) {
   next();
 });
 
-app.listen(config.port, function() {
+app.listen(config.port, function () {
   console.log('Listening on port ' + config.port);
 });
