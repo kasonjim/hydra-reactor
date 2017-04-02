@@ -1,12 +1,14 @@
+const chalk = require('chalk');
 const User = require('../models/user.js');
 
 module.exports = {
   signup: function (req, res) {
     console.log('Received the following POST request to create a user: ', req.body);
     // Mongoose method to create a user
-
     var user = new User(req.body);
+    console.log(chalk.yellow('User: ', JSON.stringify(user, null, 2)));
     user.save().then(() => {
+      console.log(chalk.yellow('User Saved to DB. Generating token...'));
       return user.generateToken();
     }).then(token => {
       res.header('x-auth', token).send(user);

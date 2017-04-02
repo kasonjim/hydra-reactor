@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -23,21 +24,28 @@ UserSchema.add({
   email: {
     type: String,
     required: true,
-    unique: true
+    trim: true,
+    unique: true,
+    validate: {
+      isAsync: true,
+      validator: validator.isEmail,
+      message: '{VALUE} is not a valid email'
+    }
   },
   password: {
     type: String,
     required: true,
-    unique: false
+    unique: false,
+    minLength: 1
   },
-  token: {
+  tokens: [{
     access: {
       type: String
     },
     token: {
       type: String
     }
-  },
+  }],
   trips: [{
     type: Schema.Types.ObjectId,
     ref: 'Trip'
@@ -45,7 +53,9 @@ UserSchema.add({
 });
 
 UserSchema.methods.generateToken = function () {
+  console.log(chalk.yellow('Entering the GenerateToken function...'));
   var user = this;
+  console.log(chalk.white('User: ', JSON.stringify(user, null, 2)));
   var access = 'auth';
   var token = jwt.sign({_id: user._id.toString(), access}, 'somesecret');
 
