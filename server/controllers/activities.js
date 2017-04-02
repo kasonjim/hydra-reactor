@@ -1,4 +1,6 @@
-const User = require('../models/userModel.js');
+const User = require('../models/user.js');
+const Activity = require('../models/activity.js');
+const Trip = require('../models/trip.js');
 
 module.exports = {
   suggestActivity: function (req, res) {
