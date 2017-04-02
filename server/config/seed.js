@@ -25,8 +25,9 @@ const Activity = require('../models/activity');
 
 const data = require('./seed-data.json');
 
-seeder.seed(data, {dropDatabase: false}).then(function (dbData) {
-  console.log(chalk.green(JSON.stringify(dbData.trips)));
-}).catch(function (err) {
-  console.log(chalk.red(err));
-});
+seeder.seed(data, {dropDatabase: false, dropCollections: false})
+  .then(function (dbData) {
+    console.log(chalk.green(JSON.stringify(dbData.trips)));
+  }).catch(function (err) {
+    console.log(chalk.red(err));
+  });
