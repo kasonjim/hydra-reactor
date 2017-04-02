@@ -1,4 +1,5 @@
-const User = require('../models/userModel.js');
+const User = require('../models/user.js');
+const Intinerary = require('../models/itinerary.js');
 
 module.exports = {
   addItineraryItem: function(req, res) {

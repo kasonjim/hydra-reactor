@@ -1,4 +1,4 @@
-var User = require('./../models/userModel');
+var User = require('./../models/user.js');
 
 // This function checks to see if the user has been authenticated to make a given request
 // get JWT token to be sent with every private request to the server
