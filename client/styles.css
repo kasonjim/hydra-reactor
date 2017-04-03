@@ -293,6 +293,48 @@ div.footer {
   font-size: 18px;
   margin-bottom: 10px;
 }
+
+.suggestion-box {
+  padding: 15px;
+}
+.yelp-logo-container {
+  text-align: right;
+}
+.yelp-logo-container img {
+  height: 30px;
+  margin-bottom: 10px;
+}
+.search-yelp-btn {
+  margin-top: 22px;
+}
+.suggestion-item {
+  border-width: 1px;
+  border-style: solid;
+  min-height: 90px;
+  padding: 10px 5px;
+}
+.suggestion-item img {
+  width: 60px;
+}
+.carousel-container {
+  height: 400px;
+  width: 700px;
+}
+.carousel-img {
+  height: 300px;
+}
+.carousel-bg {
+  background-color: rgba(30,30,30,0.8);
+  margin: 0px 30px;
+}
+.review-container {
+  min-height: 90px;
+  padding: 5px;
+}
+.review-container img {
+  height: 100px;
+  max-width: 80px;
+}
 .btn-sm {
   width: 50px;
 }

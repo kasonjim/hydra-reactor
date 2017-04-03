@@ -34,7 +34,7 @@ angular.module('tripViewModule', [
       totalLikes: 3,
       description: 'Description 2',
       category: 'restaurants',
-      itineraryId: 1
+      itineraryId: 2
     },
     {
       yelpBusinessName: 'Wanderlust Creamery',
@@ -47,7 +47,7 @@ angular.module('tripViewModule', [
       totalLikes: 5,
       description: 'Description 3',
       category: 'desserts',
-      itineraryId: 1
+      itineraryId: 3
     }
   ];
 
@@ -77,28 +77,39 @@ angular.module('tripViewModule', [
   $scope.today();
 
   // Itinerary variables
-  $scope.currentItinerary = 0;
+  $scope.currentItineraryName = '';
+  $scope.currentItineraryId = 0;
   $scope.addItinerary = function(itname, dt) {
-    console.log('title', itname);
-    console.log('date', dt);
+    console.log('add itinerary', `${itname} with date ${dt}`);
+    User.newItinerary(itname, dt);
+    // THIS $http CALL SHOULD RETURN THE RESULT, BECAUSE WE NEED ID
+    // $scope.currentItineraryId = id
     $scope.itname = '';
-    // return $http({
-    //   method: 'POST',
-    //   url: '/api/itineraries',
-    //   data: {
-          // title: itname,
-          // startDate: dt
-    // }
-    // }).then( res => {
-      // other stuff with res.
-      // $scope.itname = '';
-      // $scope.dt = '';
-    // });
+    $scope.dt = '';
+
+    // THE GHETTO WAY
+    var generateId = Math.floor(Math.random() * 100000) + 3;
+    $scope.itinerary.push({
+      id: generateId,
+      startDate: dt,
+      title: itname
+    });
+    console.log('added new itinerary item: ', generateId);
+    $scope.currentItineraryId = generateId;
+    $scope.currentItineraryName = itname;
+    $scope.selectItinerary(null, $scope.currentItineraryId);
   };
 
-  $scope.selectItinerary = function(context, index) {
-    console.log('selected itinerary: ', index);
-    $scope.currentItinerary = index;
+  $scope.filteredSuggestions = [];
+  $scope.selectItinerary = function(context, id) {
+    console.log('selected itinerary: ', id);
+    $scope.currentItineraryId = id;
+    $scope.filteredSuggestions = $scope.suggestions.filter( item => {
+      if (context !== null) {
+        $scope.currentItineraryName = context.event.title;
+      }
+      return $scope.currentItineraryId === item.itineraryId;
+    });
   };
 
   // Suggest tab functions and variables
@@ -185,6 +196,13 @@ angular.module('tripViewModule', [
       // $scope.term = '';
     // });
     $scope.activeTab = 0;
+
+    // THE GHETTO WAY
+    if ($scope.currentItineraryId !== 0) {
+      businessData.itineraryId = $scope.currentItineraryId;
+      $scope.suggestions.push(businessData);
+      $scope.selectItinerary(null, $scope.currentItineraryId);
+    }
   };
 
   // Get more details on the specific business (for now, you click on the image)
