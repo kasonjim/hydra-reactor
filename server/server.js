@@ -35,7 +35,7 @@ app.post('/api/itineraries', authenticate, itinerariesController.addItineraryIte
 
 const activitiesController = require('./controllers/activities');
 app.post('/api/activities', authenticate, activitiesController.suggestActivity);
-app.delete('/api/activities', authenticate, activitiesController.deleteActivity);
+//app.delete('/api/activities', authenticate, activitiesController.deleteActivity);
 
 const yelpController = require('./controllers/yelp');
 app.post('/api/yelpSearch', yelpController.keywordSearch);
