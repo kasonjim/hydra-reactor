@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const config = require('../config/config');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -53,9 +54,17 @@ UserSchema.add({
 });
 
 UserSchema.methods.generateToken = function () {
-  console.log(chalk.yellow('Entering the GenerateToken function...'));
+
+  if (config.debug) {
+    console.log(chalk.yellow('Entering the GenerateToken function...'));
+  }
+
   var user = this;
-  console.log(chalk.white('User: ', JSON.stringify(user, null, 2)));
+
+  if (config.debug) {
+    console.log(chalk.white('User: ', JSON.stringify(user, null, 2)));
+  }
+
   var access = 'auth';
   var token = jwt.sign({_id: user._id.toString(), access}, 'somesecret');
 
@@ -91,14 +100,14 @@ UserSchema.statics.findByToken = function (token) {
     '_id': decoded._id,
     'tokens.token': token,
     'tokens.access': 'auth'
-  });
+  }).populate('trips');
 };
 
 // find user by email and password
 UserSchema.statics.findByCredentials = function (email, password) {
   //var User = this;
 
-  return User.findOne({email}).then((user) => {
+  return User.findOne({email}).populate('trips').then((user) => {
     if (!user) {
       console.log('Promise.reject');
       return Promise.reject();

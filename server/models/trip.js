@@ -11,12 +11,12 @@ TripSchema.add({
   },
   shortDescription: {
     type: String,
-    required: true,
+    required: false,
     unique: false
   },
   location: {
     type: String,
-    required: true,
+    required: false,
     unique: false
   },
   imageUrl: {
@@ -40,3 +40,5 @@ TripSchema.add({
 });
 
 var Trip = mongoose.model('Trip', TripSchema);
+
+module.exports = Trip;

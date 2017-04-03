@@ -16,3 +16,4 @@ exports.dbPwd = process.env.MONGODB_HYDRA_PWD || '';
 
 // SERVER
 exports.port = process.env.PORT || 3000;
+exports.debug = true;
