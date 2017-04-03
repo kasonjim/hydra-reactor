@@ -30,8 +30,14 @@ module.exports = {
           next(err);
         }
         res.json(user);
+      }).then( trip => {
+        User.findOneAndUpdate({'_id': req.body.user_id}, {$push:{trips: trip._id}} , function (err, user) {
+          if (err) {
+            next(err);
+          }
+        });
+        console.log(chalk.magenta(trip._id));
       });
-
     });
   }
 };
