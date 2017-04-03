@@ -260,3 +260,45 @@ div.footer {
   position: relative;
   float: right;
 }
+
+
+/* tripView */
+.trip-header-right {
+  text-align: right
+}
+.trip-body-row {
+  margin-top: 20px;
+}
+.col-itinerary,
+.col-itinerary-detail-box {
+  padding: 20px;
+  border-width: 1px;
+  border-radius: 10px;
+  border-style: solid;
+}
+.itinerary-item,
+.selected-itinerary-item {
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+  margin: 5px 0px;
+}
+.itinerary-item {
+  background-color: #A2BDD7;
+}
+.selected-itinerary-item {
+  background-color: #dbf9ff;
+}
+.itinerary-detail-header {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.btn-sm {
+  width: 50px;
+}
+.uib-datepicker-current,
+.uib-clear,
+.uib-close {
+  width: 100px;
+  font-size: 12px;
+}

@@ -5,9 +5,9 @@ angular.module('tripViewModule', [
 .controller('tripViewController', ['$scope', '$http', 'User', function($scope, $http, User) {
   // DUMMY DATA FOR TESTING
   $scope.itinerary = [
-    { startDate: new Date(2017, 3, 31), title: 'Dinner' },
-    { startDate: new Date(2017, 4, 1), title: 'Scuba Diving' },
-    { startDate: new Date(2017, 4, 2), title: 'Rock Climbing' }
+    { id: 1, startDate: new Date(2017, 2, 30), title: 'Dinner' },
+    { id: 2, startDate: new Date(2017, 3, 1), title: 'Scuba Diving' },
+    { id: 3, startDate: new Date(2017, 3, 2), title: 'Rock Climbing' }
   ];
   $scope.suggestions = [
     {
@@ -20,7 +20,8 @@ angular.module('tripViewModule', [
       yelpImage: 'https://s3-media4.fl.yelpcdn.com/bphoto/6KUXPGhWFhUo1SfEwCCr7Q/o.jpg',
       totalLikes: 10,
       description: 'Description 1',
-      category: 'coffee'
+      category: 'coffee',
+      itineraryId: 1
     },
     {
       yelpBusinessName: 'DeSano Pizza bakery',
@@ -32,7 +33,8 @@ angular.module('tripViewModule', [
       yelpImage: 'https://s3-media2.fl.yelpcdn.com/bphoto/51Ew_R8Cpk1MlA3jZXaXqA/o.jpg',
       totalLikes: 3,
       description: 'Description 2',
-      category: 'restaurants'
+      category: 'restaurants',
+      itineraryId: 1
     },
     {
       yelpBusinessName: 'Wanderlust Creamery',
@@ -44,7 +46,8 @@ angular.module('tripViewModule', [
       yelpImage: 'https://s3-media3.fl.yelpcdn.com/bphoto/Rydcljn2hHBl-lqNCmVzyw/o.jpg',
       totalLikes: 5,
       description: 'Description 3',
-      category: 'desserts'
+      category: 'desserts',
+      itineraryId: 1
     }
   ];
 
@@ -73,41 +76,69 @@ angular.module('tripViewModule', [
   };
   $scope.today();
 
+  // Itinerary variables
+  $scope.currentItinerary = 0;
+  $scope.addItinerary = function(itname, dt) {
+    console.log('title', itname);
+    console.log('date', dt);
+    $scope.itname = '';
+    // return $http({
+    //   method: 'POST',
+    //   url: '/api/itineraries',
+    //   data: {
+          // title: itname,
+          // startDate: dt
+    // }
+    // }).then( res => {
+      // other stuff with res.
+      // $scope.itname = '';
+      // $scope.dt = '';
+    // });
+  };
+
+  $scope.selectItinerary = function(context, index) {
+    console.log('selected itinerary: ', index);
+    $scope.currentItinerary = index;
+  };
+
   // Suggest tab functions and variables
-  // current carousel item index
-  $scope.active = 0;
-  $scope.businessRating = 0;
+  $scope.activeTab = 0;
+  $scope.activeCarousel = 0;
 
   $scope.allCategories = [];  // "title" is shown on page, "alias" is the category value
   $scope.results = [];
   $scope.reviews = [];
   $scope.morePhotos = [];
   $scope.showAdditionalInfo = false;
-  $scope.categories = 'coffee';
-  $scope.term = 'peets';
+  $scope.categories = '';
+  $scope.term = '';
   $scope.location = 'Los Angeles, CA, USA';
 
-  // Watches for changes in the carousel
-  $scope.$watch('active', function(index) {
-    if ($scope.results.length !== 0) {
+  // Watches for changes in the carousel - NO LONGER WORKS IN THIS FILE FOR SOME REASON
+  $scope.$watch('activeCarousel', function(index) {
+    if ($scope.results.length !== 0 && index !== -1) {
+      console.log('$scope.activeCarousel', $scope.activeCarousel);
       // Hide header until new review/photo results are in
       $scope.showAdditionalInfo = false;
-      $scope.businessRating = $scope.results[index].rating;
       $scope.businessDetails(index);
     }
   });
 
+  $scope.getReviews = function(index) {
+    $scope.showAdditionalInfo = false;
+    $scope.businessDetails(index);
+  };
+
   // Search yelp based on the three fields above (location will be automatic in our site later)
-  $scope.search = function() {
+  $scope.search = function(term, categories) {
     // Set to -1 to invoke a "change" when watching for active
     // This will reset to 0 when search returns successful results
-    $scope.active = 1;
+    $scope.activeCarousel = -1;
     // Hide header until new review/photo results are in
     $scope.showAdditionalInfo = false;
 
-    console.log($scope.term);
-    console.log($scope.location);
-    console.log($scope.categories);
+    $scope.term = term;
+    $scope.categories = categories;
 
     return $http({
       method: 'POST',
@@ -125,12 +156,12 @@ angular.module('tripViewModule', [
     }).then( res => {
       console.log('search results', res.data);
       $scope.results = res.data;
-      $scope.active = 0;
+      $scope.activeCarousel = 0;
     });
   };
 
-  $scope.add = function() {
-    var currentBusiness = $scope.results[$scope.active];
+  $scope.addSuggestion = function(index) {
+    var currentBusiness = $scope.results[index];
     var businessData = {
       yelpBusinessName: currentBusiness.name,
       yelpUrl: currentBusiness.url,
@@ -149,8 +180,11 @@ angular.module('tripViewModule', [
     //   url: '/api/activities',
     //   data: businessData
     // }).then( res => {
-
+      // other stuff with res.
+      // $scope.categories = '';
+      // $scope.term = '';
     // });
+    $scope.activeTab = 0;
   };
 
   // Get more details on the specific business (for now, you click on the image)
