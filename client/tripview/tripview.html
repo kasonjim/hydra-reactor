@@ -11,7 +11,10 @@
         <a href="">Leave/Delete Trip</a><br /><br />
         <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Invite a Friend</button>
         <div uib-collapse="isCollapsed">
-          <input class="form-control" placeholder="Email address" />
+          <form  method="post" enctype="text/plain">
+            <input class="form-control" placeholder="Email address" ng-model="inviteEmailAddress" />
+            <button type="submit" ng-click="sendMail()">Submit</button>
+          </form>
         </div>
     </div>
   </div>
@@ -49,7 +52,7 @@
               <div class="col-md-2">
                 <img ng-src="{{suggestion.yelpImage}}"><br />
               </div>
-              <div class="col-md-7">
+              <div class="col-md-9">
                 <a href="{{suggestion.yelpUrl}}" target="_blank">{{suggestion.yelpBusinessName}}</a><br />
                 <!-- {{suggestion.yelpID}} -->
                 <!-- {{suggestion.description}} -->
@@ -59,10 +62,10 @@
               <div class="col-md-1">
                 {{suggestion.yelpPriceRange}}<br />
               </div>
-              <div class="col-md-2">
+<!--               <div class="col-md-2">
                 heart<br />
                 {{suggestion.totalLikes}}
-              </div>
+              </div> -->
             </div>
           </div>
         </uib-tab>

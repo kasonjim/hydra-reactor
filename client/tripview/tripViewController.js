@@ -2,54 +2,70 @@ angular.module('tripViewModule', [
   'ui.bootstrap'
 ])
 
-.controller('tripViewController', ['$scope', '$http', 'User', function($scope, $http, User) {
+.controller('tripViewController', ['$scope', '$http', 'User', '$window', function($scope, $http, User, $window) {
+  // Legacy variables (we still might need)
+  $scope.userData = User.userData;
+  $scope.newActivity = User.newActivity;
+  $scope.currentTripIndex = User.currentTripIndex;
+  $scope.deleteActivity = User.deleteActivity;
+
   // DUMMY DATA FOR TESTING
   $scope.itinerary = [
-    { id: 1, startDate: new Date(2017, 2, 30), title: 'Dinner' },
-    { id: 2, startDate: new Date(2017, 3, 1), title: 'Scuba Diving' },
-    { id: 3, startDate: new Date(2017, 3, 2), title: 'Rock Climbing' }
+    // { id: 1, startDate: new Date(2017, 2, 30), title: 'Dinner' },
+    // { id: 2, startDate: new Date(2017, 3, 1), title: 'Scuba Diving' },
+    // { id: 3, startDate: new Date(2017, 3, 2), title: 'Rock Climbing' }
   ];
   $scope.suggestions = [
-    {
-      yelpBusinessName: 'The Temporarium Coffee & Tea',
-      yelpUrl: 'https://www.yelp.com/biz/the-temporarium-coffee-and-tea-san-francisco?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
-      yelpRating: 5,
-      yelpPriceRange: '$',
-      yelpID: 'the-temporarium-coffee-and-tea-san-francisco',
-      yelpReviewCount: 128,
-      yelpImage: 'https://s3-media4.fl.yelpcdn.com/bphoto/6KUXPGhWFhUo1SfEwCCr7Q/o.jpg',
-      totalLikes: 10,
-      description: 'Description 1',
-      category: 'coffee',
-      itineraryId: 1
-    },
-    {
-      yelpBusinessName: 'DeSano Pizza bakery',
-      yelpUrl: 'https://www.yelp.com/biz/desano-pizza-bakery-los-angeles?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
-      yelpRating: 4.5,
-      yelpPriceRange: '$$',
-      yelpID: 'desano-pizza-bakery-los-angeles',
-      yelpReviewCount: 620,
-      yelpImage: 'https://s3-media2.fl.yelpcdn.com/bphoto/51Ew_R8Cpk1MlA3jZXaXqA/o.jpg',
-      totalLikes: 3,
-      description: 'Description 2',
-      category: 'restaurants',
-      itineraryId: 2
-    },
-    {
-      yelpBusinessName: 'Wanderlust Creamery',
-      yelpUrl: 'https://www.yelp.com/biz/wanderlust-creamery-los-angeles-2?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
-      yelpRating: 4.5,
-      yelpPriceRange: '$',
-      yelpID: '"wanderlust-creamery-los-angeles-2"',
-      yelpReviewCount: 48,
-      yelpImage: 'https://s3-media3.fl.yelpcdn.com/bphoto/Rydcljn2hHBl-lqNCmVzyw/o.jpg',
-      totalLikes: 5,
-      description: 'Description 3',
-      category: 'desserts',
-      itineraryId: 3
-    }
+    // {
+    //   yelpBusinessName: 'The Temporarium Coffee & Tea',
+    //   yelpUrl: 'https://www.yelp.com/biz/the-temporarium-coffee-and-tea-san-francisco?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+    //   yelpRating: 5,
+    //   yelpPriceRange: '$',
+    //   yelpID: 'the-temporarium-coffee-and-tea-san-franciscafco',
+    //   yelpReviewCount: 128,
+    //   yelpImage: 'https://s3-media4.fl.yelpcdn.com/bphoto/6KUXPGhWFhUo1SfEwCCr7Q/o.jpg',
+    //   totalLikes: 10,
+    //   description: 'Description 1',
+    //   category: 'coffee',
+    //   itineraryId: 1
+    // },
+    // {
+    //   yelpBusinessName: 'DeSano Pizza bakery',
+    //   yelpUrl: 'https://www.yelp.com/biz/desano-pizza-bakery-los-angeles?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+    //   yelpRating: 4.5,
+    //   yelpPriceRange: '$$',
+    //   yelpID: 'desano-pizza-bakery-los-angeles',
+    //   yelpReviewCount: 620,
+    //   yelpImage: 'https://s3-media2.fl.yelpcdn.com/bphoto/51Ew_R8Cpk1MlA3jZXaXqA/o.jpg',
+    //   totalLikes: 3,
+    //   description: 'Description 2',
+    //   category: 'restaurants',
+    //   itineraryId: 2
+    // },
+    // {
+    //   yelpBusinessName: 'Wanderlust Creamery',
+    //   yelpUrl: 'https://www.yelp.com/biz/wanderlust-creamery-los-angeles-2?adjust_creative=p8w_DRU96tNeK6xL8dcptg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=p8w_DRU96tNeK6xL8dcptg',
+    //   yelpRating: 4.5,
+    //   yelpPriceRange: '$',
+    //   yelpID: '"wanderlust-creamery-los-angeles-2"',
+    //   yelpReviewCount: 48,
+    //   yelpImage: 'https://s3-media3.fl.yelpcdn.com/bphoto/Rydcljn2hHBl-lqNCmVzyw/o.jpg',
+    //   totalLikes: 5,
+    //   description: 'Description 3',
+    //   category: 'desserts',
+    //   itineraryId: 3
+    // }
   ];
+
+  $scope.inviteEmailAddress = '';
+  $scope.sendMail = function(){
+    console.log('sent');
+    var subject = "You have been invited to use hydraTravel!";
+    var message = "Visit http://hydra-travel.herokuapp.com to get started";
+    $window.open("mailto:"+ $scope.inviteEmailAddress + "?subject=" + subject+"&body="+message,"_self");
+    $scope.isCollapsed = true;
+    $scope.inviteEmailAddress = '';
+  };
 
   // invite a friend field
   $scope.isCollapsed = true;
@@ -82,7 +98,8 @@ angular.module('tripViewModule', [
   $scope.addItinerary = function(itname, dt) {
     console.log('add itinerary', `${itname} with date ${dt}`);
     User.newItinerary(itname, dt);
-    // THIS $http CALL SHOULD RETURN THE RESULT, BECAUSE WE NEED ID
+    // [TODO] include trip_id, also alter app.js that has this function
+    // [TODO]  THIS $http CALL SHOULD RETURN THE RESULT, BECAUSE WE NEED ID
     // $scope.currentItineraryId = id
     $scope.itname = '';
     $scope.dt = '';
@@ -92,7 +109,8 @@ angular.module('tripViewModule', [
     $scope.itinerary.push({
       id: generateId,
       startDate: dt,
-      title: itname
+      title: itname,
+      trip_id: $scope.userData.value.trips[$scope.currentTripIndex.value]._id
     });
     console.log('added new itinerary item: ', generateId);
     $scope.currentItineraryId = generateId;
@@ -123,7 +141,7 @@ angular.module('tripViewModule', [
   $scope.showAdditionalInfo = false;
   $scope.categories = '';
   $scope.term = '';
-  $scope.location = 'Los Angeles, CA, USA';
+  $scope.location = $scope.userData.value.trips[$scope.currentTripIndex.value].location;
 
   // Watches for changes in the carousel - NO LONGER WORKS IN THIS FILE FOR SOME REASON
   $scope.$watch('activeCarousel', function(index) {
@@ -186,6 +204,7 @@ angular.module('tripViewModule', [
       category: $scope.categories.alias
     };
     console.log('business data', businessData);
+    // [TODO] send itinerary ID also
     // return $http({
     //   method: 'POST',
     //   url: '/api/activities',
@@ -240,10 +259,4 @@ angular.module('tripViewModule', [
   };
 
   $scope.seed();
-
-  // Legacy variables (we still might need)
-  $scope.userData = User.userData;
-  $scope.newActivity = User.newActivity;
-  $scope.currentTripIndex = User.currentTripIndex;
-  $scope.deleteActivity = User.deleteActivity;
 }]);
