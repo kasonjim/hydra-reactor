@@ -122,6 +122,20 @@ app.factory('User', function($http, $window, $location, $rootScope) {
 
   };
 
+  var newItinerary = function(title, startDate) {
+    var req = {
+      method: 'POST',
+      url: '/api/itineraries',
+      headers: {
+        'x-auth': sessionStorage.getItem('auth')
+      },
+      data: {
+        title: title,
+        startDate: startDate
+      }
+    }
+  };
+
   var newActivity = function(user_id, trip_id, description, category) {
     var req = {
       method: 'POST',
