@@ -18,7 +18,7 @@
 * [Model One-to-Many Relationships with  Document References](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
 * [MongoDB Datatypes](https://www.tutorialspoint.com/mongodb/mongodb_datatype.htm)
 * [Invalid Value for Schema Array Path](http://stackoverflow.com/questions/30856208/invalid-value-for-schema-array-path)
-
+* [Styling angular-ui-boostrap DatePicker](http://matthewyarlett.blogspot.com/2014/09/styling-ui-bootstrap-angularjs.html);
 
 ## CDN Links
 
@@ -37,9 +37,9 @@
 
 ## Troubleshooting
 
-* **Cannot connect to MongoDB/Connection Refused**: 
+* **Cannot connect to MongoDB/Connection Refused**:
     * Navigate to `/data/db` in the Terminal
-    * If there is a `mongod.lock` file, delete it 
+    * If there is a `mongod.lock` file, delete it
     * Try to restart the `mongod` service using `brew services start mongodb`
     * Try to enter the shell using the command `mongo`
 
