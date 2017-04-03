@@ -50,6 +50,38 @@ app.use(function (err, req, res, next) {
   next();
 });
 
+const nodemailer = require('nodemailer');
+app.post('/api/mail', function (req,res) {
+  
+
+// create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'Mailgun',
+    auth: {
+        user: 'postmaster@sandbox3cef9df6cd7543b396b055d708cff793.mailgun.org',
+        pass: 'hrr22hydra'
+      }
+  });
+
+// setup email data with unicode symbols
+  console.log(req.body.email);
+  let mailOptions = {
+    from: 'travelwithhydra@gmail.com', // sender address
+    to: req.body.email, // list of receivers
+    subject: 'You\'ve been invited to plan a trip', // Subject line
+    text: 'Please go to http://hydra-travel.herokuapp.com and sign in with your email to help your friends plan a trip' // plain text body
+      //html: '<b>Hello world ?</b>' // html body
+  };
+
+// send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+      }
+    console.log('Message %s sent: %s', info.messageId, info.response);  
+  });
+});  
+
 app.listen(config.port, function () {
   console.log('Listening on port ' + config.port);
 });
