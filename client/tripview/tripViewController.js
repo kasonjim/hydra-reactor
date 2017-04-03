@@ -61,20 +61,21 @@ angular.module('tripViewModule', [
   $scope.sendMail = function(){
     // console.log('sent');
     // var subject = "You have been invited to use hydraTravel!";
-    // var message = "Visit http://hydra-travel.herokuapp.com to get started";
+    // var message = "Come check out this awesome site to plan our next trip! Visit http://hydra-travel.herokuapp.com to get started";
     // $window.open("mailto:"+ $scope.inviteEmailAddress + "?subject=" + subject+"&body="+message,"_self");
+    // $scope.inviteEmailAddress = '';
     $scope.isCollapsed = true;
-    
+
     return $http({
       method: 'POST',
       url: '/api/mail',
-      data: { 
+      data: {
         email: $scope.inviteEmailAddress
       }
     }).then( res => {
       $scope.inviteEmailAddress = '';
     });
-    
+
   };
 
   // invite a friend field
