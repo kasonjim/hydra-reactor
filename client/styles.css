@@ -28,7 +28,6 @@ h1 {
   position: relative;
   top: 20px;
 }
-
 .activity-group {
   position: relative;
   top: 140px;
@@ -343,4 +342,9 @@ div.footer {
 .uib-close {
   width: 100px;
   font-size: 12px;
+}
+
+h1 .sign-header {
+  font-size: 24px;
+  text-align: right;
 }
