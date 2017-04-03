@@ -2,7 +2,9 @@
   <form>
     <div class="form-group">
       <input type="text" class="form-control" id="exampleTripName" placeholder="Trip Name" ng-model="tripName">
+      <input type="text" class="form-control" id="exampleTripDescription" placeholder="Short Description" ng-model="shortDescription">
+      <input type="text" class="form-control" id="exampleTripLocation" placeholder="Location" ng-model="location">
     </div>
-    <button type="submit" class="btn trip-creator-btn" ng-click="newTrip(userData.value['_id'], tripName); go('/dashboard')">Submit</button>
+    <button type="submit" class="btn trip-creator-btn" ng-click="newTrip(userData.value['_id'], tripName, shortDescription, location); go('/dashboard')">Submit</button>
   </form>
 </div>
