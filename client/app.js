@@ -223,6 +223,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
    // logout: logout,
     setTripIndex: setTripIndex,
     currentTripIndex: currentTripIndex,
-    go: go
+    go: go,
+    newItinerary: newItinerary
   };
 });
