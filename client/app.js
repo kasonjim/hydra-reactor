@@ -94,7 +94,7 @@ app.factory('User', function($http, $window, $location, $rootScope) {
   //   sessionStorage.removeItem('auth');
   // };
 
-  var newTrip = function(user_id, tripName) {
+  var newTrip = function(user_id, tripName, shortDescription, location) {
     var req = {
       method: 'POST',
       url: '/api/trips',
@@ -104,7 +104,9 @@ app.factory('User', function($http, $window, $location, $rootScope) {
       data: {
         "user_id": user_id,
         "trip": {
-          "tripName": tripName
+          "tripName": tripName,
+          "shortDescription": shortDescription,
+          "location": location
         }
       }
     };
