@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+const config = require('../config/config');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -23,21 +25,28 @@ UserSchema.add({
   email: {
     type: String,
     required: true,
-    unique: true
+    trim: true,
+    unique: true,
+    validate: {
+      isAsync: true,
+      validator: validator.isEmail,
+      message: '{VALUE} is not a valid email'
+    }
   },
   password: {
     type: String,
     required: true,
-    unique: false
+    unique: false,
+    minLength: 1
   },
-  token: {
+  tokens: [{
     access: {
       type: String
     },
     token: {
       type: String
     }
-  },
+  }],
   trips: [{
     type: Schema.Types.ObjectId,
     ref: 'Trip'
@@ -45,7 +54,17 @@ UserSchema.add({
 });
 
 UserSchema.methods.generateToken = function () {
+
+  if (config.debug) {
+    console.log(chalk.yellow('Entering the GenerateToken function...'));
+  }
+
   var user = this;
+
+  if (config.debug) {
+    console.log(chalk.white('User: ', JSON.stringify(user, null, 2)));
+  }
+
   var access = 'auth';
   var token = jwt.sign({_id: user._id.toString(), access}, 'somesecret');
 
@@ -81,14 +100,14 @@ UserSchema.statics.findByToken = function (token) {
     '_id': decoded._id,
     'tokens.token': token,
     'tokens.access': 'auth'
-  });
+  }).populate('trips');
 };
 
 // find user by email and password
 UserSchema.statics.findByCredentials = function (email, password) {
   //var User = this;
 
-  return User.findOne({email}).then((user) => {
+  return User.findOne({email}).populate('trips').then((user) => {
     if (!user) {
       console.log('Promise.reject');
       return Promise.reject();

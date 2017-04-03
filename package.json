@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Hydra-Reactor",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "restart": "node server/config/seed.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/darinallen/hydra-reactor.git"
@@ -23,6 +26,7 @@
     "mongoose": "^4.9.0",
     "mongoose-seeder": "^1.2.1",
     "path": "^0.12.7",
+    "q": "^1.5.0",
     "request": "^2.81.0",
     "validator": "^7.0.0",
     "yelp-fusion": "^1.0.3"
