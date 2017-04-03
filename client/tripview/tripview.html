@@ -28,7 +28,7 @@
       <hr>
       <h4>Current Itinerary</h4>
         <div ng-repeat="event in itinerary track by $index">
-          <div class="row selected-itinerary-item" ng-click="selectItinerary(this, $index)" >
+          <div class="row selected-itinerary-item" ng-click="selectItinerary(this, event.id)" >
             <div class="col-md-12">
               <strong>Title: {{event.title}}</strong>
             </div>
@@ -40,14 +40,14 @@
     </div>
     <!-- Row 2, Col 2 -->
     <div class="col-md-9 col-itinerary-detail-box">
-      <div class="itinerary-detail-header">Viewing Itinerary for <strong>{{itinerary[currentItinerary].title}}</strong></div>
+      <div class="itinerary-detail-header">Viewing Itinerary for <strong>{{currentItineraryName}}</strong></div>
       <uib-tabset active="activeTab" justified="true">
         <!-- Current Suggestions tab -->
         <uib-tab index="0" heading="Current Suggestions">
           <div class="row">
-            <div class="col-md-6" ng-repeat="suggestion in suggestions" style="border-width: 1px; border-style: solid; min-height: 90px; padding: 10px 5px;">
+            <div class="col-md-6 suggestion-item" ng-repeat="suggestion in filteredSuggestions track by $index">
               <div class="col-md-2">
-                <img ng-src="{{suggestion.yelpImage}}" style="width: 60px;"><br />
+                <img ng-src="{{suggestion.yelpImage}}"><br />
               </div>
               <div class="col-md-7">
                 <a href="{{suggestion.yelpUrl}}" target="_blank">{{suggestion.yelpBusinessName}}</a><br />
@@ -69,13 +69,13 @@
 
         <!-- Add a suggestion tab -->
         <uib-tab index="1" heading="Add a Suggestion">
-          <div style="padding: 15px;">
+          <div class="suggestion-box">
             <div class="row">
               <div class="col-md-6">
-                <h3 style="display: inline;">Add a suggestion!</h3>
+                <h3>Add a suggestion!</h3>
               </div>
-              <div class="col-md-6" style="text-align: right">
-                Powered by:<img src="../images/yelp.png" style="height: 30px; margin-bottom: 10px;">
+              <div class="col-md-6 yelp-logo-container">
+                Powered by:<img src="../images/yelp.png">
               </div>
             </div>
 
@@ -90,18 +90,18 @@
                 <input type="text" ng-model="term" placeholder="Search..." class="form-control" />
               </div>
               <div class="col-md-3">
-                <button class="btn btn-primary" ng-click="search(term,categories)" style="margin-top: 22px;">Submit</button><br /><br />
+                <button class="btn btn-primary search-yelp-btn" ng-click="search(term,categories)">Submit</button><br /><br />
               </div>
             </div>
 
             <!-- result carousel -->
-            <div class="row" style="height: 400px; width: 700px">
-              <div style="margin-left: 20px;">Showing top {{results.length}} results</div>
+            <div class="row carousel-container">
+              <strong>Showing top {{results.length}} results</strong>
               <div uib-carousel active="activeCarousel">
                 <div uib-slide ng-repeat="result in results track by $index" index="$index">
                   <button class="btn btn-danger" ng-click="addSuggestion(activeCarousel)">ADD</button><br />
-                  <img ng-click="businessDetails($index)" ng-src="{{result.image_url}}" style="height: 300px"><br />
-                  <div class="carousel-caption" style="background-color: rgba(30,30,30,0.8)">
+                  <img class="carousel-img" ng-click="businessDetails($index)" ng-src="{{result.image_url}}"><br />
+                  <div class="carousel-caption carousel-bg">
                     <a href="{{result.url}}" target="_blank"><strong>{{result.name}}</strong></a> ({{result.price}})<br />
                     {{result.location.display_address.join(', ')}}<br />
                     Rating: {{result.rating}}/5 with {{result.review_count}} <a ng-click="getReviews(activeCarousel)">reviews</a><br />
@@ -113,9 +113,9 @@
             <!-- reviews -->
             <div class="row" ng-if="showAdditionalInfo">
               <h4>Recent Reviews Photos for <strong>{{results[activeCarousel].name}}</strong></h4>
-              <div class="row" ng-repeat="review in reviews track by $index" index="$index" style="min-height: 90px; padding: 5px;">
+              <div class="row review-container" ng-repeat="review in reviews track by $index" index="$index">
                 <div class="col-md-2">
-                  <img ng-src="{{review.user.image_url}}" style="height: 100px; max-width: 80px;">
+                  <img ng-src="{{review.user.image_url}}">
                 </div>
                 <div class="col-md-7">
                   {{review.user.name}}
