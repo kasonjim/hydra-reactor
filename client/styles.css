@@ -349,3 +349,11 @@ h1 .sign-header {
   text-align: right;
 }
 
+.btn-responsive {
+    padding:2px 4px;
+    font-size:100%;
+    line-height: 2;
+    border-radius:3px;
+    float: right;
+  }
+
