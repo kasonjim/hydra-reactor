@@ -21,3 +21,5 @@ ItinerarySchema.add({
 });
 
 var Itinerary = mongoose.model('Itinerary', ItinerarySchema);
+
+module.exports = Itinerary;

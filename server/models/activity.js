@@ -51,3 +51,5 @@ ActivitySchema.add({
 });
 
 var Activity = mongoose.model('Activity', ActivitySchema);
+
+module.exports = Activity;
