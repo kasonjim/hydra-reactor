@@ -50,7 +50,7 @@ angular.module('signinSplash', [
         }
       }
     },
-    templateUrl: 'tripview/tripView.html',
+    templateUrl: 'tripview/tripview.html',
     controller: 'tripViewController'
   })
   .when('/suggest', {
